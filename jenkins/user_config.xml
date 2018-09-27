@@ -1,0 +1,58 @@
+<?xml version='1.1' encoding='UTF-8'?>
+<user>
+  <fullName>admin</fullName>
+  <description></description>
+  <properties>
+    <jenkins.security.ApiTokenProperty>
+      <tokenStore>
+        <tokenList/>
+      </tokenStore>
+    </jenkins.security.ApiTokenProperty>
+    <com.cloudbees.plugins.credentials.UserCredentialsProvider_-UserCredentialsProperty plugin="credentials@2.1.18">
+      <domainCredentialsMap class="hudson.util.CopyOnWriteMap$Hash">
+        <entry>
+          <com.cloudbees.plugins.credentials.domains.Domain>
+            <specifications/>
+          </com.cloudbees.plugins.credentials.domains.Domain>
+          <java.util.concurrent.CopyOnWriteArrayList/>
+        </entry>
+      </domainCredentialsMap>
+    </com.cloudbees.plugins.credentials.UserCredentialsProvider_-UserCredentialsProperty>
+    <hudson.tasks.Mailer_-UserProperty plugin="mailer@1.21">
+      <emailAddress></emailAddress>
+    </hudson.tasks.Mailer_-UserProperty>
+    <jenkins.security.LastGrantedAuthoritiesProperty>
+      <roles>
+        <string>authenticated</string>
+      </roles>
+      <timestamp>1538046346803</timestamp>
+    </jenkins.security.LastGrantedAuthoritiesProperty>
+    <hudson.model.MyViewsProperty>
+      <primaryViewName></primaryViewName>
+      <views>
+        <hudson.model.AllView>
+          <owner class="hudson.model.MyViewsProperty" reference="../../.."/>
+          <name>all</name>
+          <filterExecutors>false</filterExecutors>
+          <filterQueue>false</filterQueue>
+          <properties class="hudson.model.View$PropertyList"/>
+        </hudson.model.AllView>
+      </views>
+    </hudson.model.MyViewsProperty>
+    <org.jenkinsci.plugins.displayurlapi.user.PreferredProviderUserProperty plugin="display-url-api@2.2.0">
+      <providerId>default</providerId>
+    </org.jenkinsci.plugins.displayurlapi.user.PreferredProviderUserProperty>
+    <hudson.model.PaneStatusProperties>
+      <collapsed/>
+    </hudson.model.PaneStatusProperties>
+    <hudson.security.HudsonPrivateSecurityRealm_-Details>
+      <passwordHash>#jbcrypt:$2a$10$6VCd5SWSQDXxlplRruc.1.mHxG10m.c26R4hVKugxbaK1wlHzBUFy</passwordHash>
+    </hudson.security.HudsonPrivateSecurityRealm_-Details>
+    <org.jenkinsci.main.modules.cli.auth.ssh.UserPropertyImpl>
+      <authorizedKeys></authorizedKeys>
+    </org.jenkinsci.main.modules.cli.auth.ssh.UserPropertyImpl>
+    <hudson.search.UserSearchProperty>
+      <insensitiveSearch>true</insensitiveSearch>
+    </hudson.search.UserSearchProperty>
+  </properties>
+</user>
