@@ -48,7 +48,7 @@
             <idleMinutes>20</idleMinutes>
           </retentionStrategy>
           <dockerTemplateBase>
-            <image>gra3m3/ssh-slave:v1</image>
+            <image>gra3m3/ssh-slave:latest</image>
             <pullCredentialsId></pullCredentialsId>
             <dockerCommand></dockerCommand>
             <hostname></hostname>
