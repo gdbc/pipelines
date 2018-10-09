@@ -1,6 +1,6 @@
 FROM oraclelinux:7-slim
 RUN cd /etc/yum.repos.d/ && sed -i '0,/addons/! {0,/enabled=0/ s/enabled=0/enabled=1/}' public-yum-ol7.repo
-RUN yum install -y openssh-server git unzip zip wget docker java-1.8.0-openjdk-headless && yum clean all
+RUN yum install -y openssh-server git unzip zip wget docker java && yum clean all
 # update sshd settings, create jenkins user, set jenkins user pw, generate ssh keys
 RUN sed -i 's|session    required     pam_loginuid.so|session    optional     pam_loginuid.so|g' /etc/pam.d/sshd \
     && mkdir -p /var/run/sshd \
