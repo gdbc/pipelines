@@ -1,5 +1,6 @@
 FROM jenkins/jenkins
 WORKDIR /var/jenkins_home
+ENV JAVA_OPTS -Dhudson.plugins.sshslaves.SSHLauncher.trackCredentials=false 
 COPY plugins.txt /var/jenkins_home
 COPY user_config.xml /var/jenkins_home/users/admin/config.xml
 COPY config.xml /var/jenkins_home/config.xml
