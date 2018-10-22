@@ -26,7 +26,9 @@ RUN sed -i 's|session    required     pam_loginuid.so|session    optional     pa
     && mkdir -p /var/run/sshd \
     && /usr/bin/ssh-keygen -A  
 RUN mkdir /home/jenkins/jdk/bin/ -p
+RUN mkdir /root/jdk/bin/ -p
 RUN ln -s /usr/lib/jvm/jre-1.8.0-openjdk/bin/java /home/jenkins/jdk/bin/java
+RUN ln -s /usr/lib/jvm/jre-1.8.0-openjdk/bin/java /root/jdk/bin/java
 RUN echo "PermitRootLogin without-password" >> /etc/ssh/sshd_config
 RUN sed -i "s/PasswordAuthentication yes/PasswordAuthentication no/g" /etc/ssh/sshd_config
 
