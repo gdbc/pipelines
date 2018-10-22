@@ -8,10 +8,12 @@ ARG gid=1000
 ENV JENKINS_HOME /home/${user}
 ENV JAVA_HOME /usr/lib/jvm/jre-1.8.0-openjdk
 ENV JRE_HOME /usr/lib/jvm/java-1.8.0-openjdk-1.8.0.181-3.b13.el7_5.x86_64/jre
+ARG JENKINS_AGENT_HOME=/home/${user}
+ENV JENKINS_AGENT_HOME ${JENKINS_AGENT_HOME}
 
 # Jenkins is run with user `jenkins`, uid = 1000
 RUN groupadd -g ${gid} ${group} \
-    && useradd -d "$JENKINS_HOME" -u ${uid} -g ${gid} -m -s /bin/bash ${user}
+    && useradd -d "${JENKINS_AGENT_HOME}" -u ${uid} -g ${gid} -m -s /bin/bash ${user}
 
 RUN chown -R ${user}:${user} /home/${user}
 
@@ -35,6 +37,16 @@ RUN echo "PermitRootLogin without-password" >> /etc/ssh/sshd_config
 RUN echo "AcceptEnv LANG LC_*" >> /etc/ssh/sshd_config
 RUN echo "PrintMotd no" >> /etc/ssh/sshd_config
 RUN sed -i "s/PasswordAuthentication yes/PasswordAuthentication no/g" /etc/ssh/sshd_config
+RUN sed -i /etc/ssh/sshd_config \
+        -e 's/#PermitRootLogin.*/PermitRootLogin no/' \
+        -e 's/#RSAAuthentication.*/RSAAuthentication yes/'  \
+        -e 's/#PasswordAuthentication.*/PasswordAuthentication no/' \
+        -e 's/#SyslogFacility.*/SyslogFacility AUTH/' \
+        -e 's/#LogLevel.*/LogLevel INFO/' && \
+    mkdir /var/run/sshd
+
+VOLUME "${JENKINS_AGENT_HOME}" "/tmp" "/run" "/var/run"
+WORKDIR "${JENKINS_AGENT_HOME}"
 
 
 # Standard SSH port
