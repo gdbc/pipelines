@@ -25,14 +25,19 @@ RUN yum install -y openssh-server git unzip zip docker java-1.8.0-openjdk.x86_64
 RUN sed -i 's|session    required     pam_loginuid.so|session    optional     pam_loginuid.so|g' /etc/pam.d/sshd \
     && mkdir -p /var/run/sshd \
     && /usr/bin/ssh-keygen -A  
+COPY setup-sshd /usr/local/bin/
+RUN chmod 777 /usr/local/bin/setup-sshd
 RUN mkdir /home/jenkins/jdk/bin/ -p
 RUN mkdir /root/jdk/bin/ -p
 RUN ln -s /usr/lib/jvm/jre-1.8.0-openjdk/bin/java /home/jenkins/jdk/bin/java
 RUN ln -s /usr/lib/jvm/jre-1.8.0-openjdk/bin/java /root/jdk/bin/java
 RUN echo "PermitRootLogin without-password" >> /etc/ssh/sshd_config
+RUN echo "AcceptEnv LANG LC_*" >> /etc/ssh/sshd_config
+RUN echo "PrintMotd no" >> /etc/ssh/sshd_config
 RUN sed -i "s/PasswordAuthentication yes/PasswordAuthentication no/g" /etc/ssh/sshd_config
 
 
 # Standard SSH port
 EXPOSE 22
-#CMD ["/usr/sbin/sshd", "-D"]
+#CMD ["/usr/sbin/sshd", "-D", "-e"]
+ENTRYPOINT ["setup-sshd"]
