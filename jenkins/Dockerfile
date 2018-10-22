@@ -10,7 +10,7 @@ RUN mkdir -p /var/jenkins_home/jobs/ssh-slave
 RUN mkdir -p /var/jenkins_home/jobs/ol-ssh-slave
 COPY jenkins_config.xml /var/jenkins_home/jobs/jenkins/config.xml
 COPY  ssh-slave_config.xml /var/jenkins_home/jobs/ssh-slave/config.xml
-COPY  ol-slave_config.xml /var/jenkins_home/jobs/ol-ssh-slave/config.xml
+COPY  ol-slave-config.xml /var/jenkins_home/jobs/ol-ssh-slave/config.xml
 RUN chown -R jenkins:jenkins /var/jenkins_home/jobs/jenkins
 RUN chown -R jenkins:jenkins /var/jenkins_home/jobs/ssh-slave
 RUN chown -R jenkins:jenkins /var/jenkins_home/jobs/ol-ssh-slave
