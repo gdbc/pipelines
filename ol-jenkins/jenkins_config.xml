@@ -31,7 +31,7 @@
           <connector class="io.jenkins.docker.connector.DockerComputerAttachConnector">
             <user>root</user>
           </connector>
-          <remoteFs>/var/lib/jenkins</remoteFs>
+          <remoteFs>/home/jenkins</remoteFs>
           <instanceCap>2147483647</instanceCap>
           <mode>NORMAL</mode>
           <retentionStrategy class="com.nirima.jenkins.plugins.docker.strategy.DockerOnceRetentionStrategy">
