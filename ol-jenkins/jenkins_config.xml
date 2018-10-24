@@ -66,7 +66,7 @@
       </templates>
       <dockerApi>
         <dockerHost plugin="docker-commons@1.13">
-          <uri>tcp://127.0.0.1:2375</uri>
+          <uri>tcp://dhost:2375</uri>
         </dockerHost>
         <connectTimeout>60</connectTimeout>
         <readTimeout>60</readTimeout>
