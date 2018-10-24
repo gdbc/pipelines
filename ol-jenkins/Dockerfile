@@ -1,4 +1,4 @@
-FROM gra3m3/ol-jenkins-yum:1
+FROM gra3m3/ol-jenkins-base:1
 
 USER jenkins
 ENV JENKINS_HOME /var/lib/jenkins
