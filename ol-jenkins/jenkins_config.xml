@@ -60,7 +60,7 @@
           <pullTimeout>300</pullTimeout>
           <nodeProperties class="empty-list"/>
           <disabled>
-            <disabledByChoice>true</disabledByChoice>
+            <disabledByChoice>false</disabledByChoice>
           </disabled>
         </com.nirima.jenkins.plugins.docker.DockerTemplate>
       </templates>
@@ -74,7 +74,7 @@
       <containerCap>100</containerCap>
       <exposeDockerHost>false</exposeDockerHost>
       <disabled>
-        <disabledByChoice>true</disabledByChoice>
+        <disabledByChoice>false</disabledByChoice>
       </disabled>
     </com.nirima.jenkins.plugins.docker.DockerCloud>
   </clouds>
