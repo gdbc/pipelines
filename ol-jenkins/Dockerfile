@@ -1,13 +1,16 @@
-FROM gra3m3/ol-jenkins-base:1
+FROM gra3m3/ol-jenkins-base:latest
 
 ENV JENKINS_HOME /var/lib/jenkins
 USER jenkins
 WORKDIR ${JENKINS_HOME}
 RUN mkdir -p ${JENKINS_HOME}/users/admin
+RUN mkdir -p ${JENKINS_HOME}/jobs/ol-Jenkins/
+RUN mkdir -p ${JENKINS_HOME}/jobs/ol-jenkins-base/
+RUN mkdir -p ${JENKINS_HOME}/jobs/ol-slave/
 
-#COPY jenkins_config.xml /var/lib/jenkins/.jenkins/config.xml
 COPY jenkins_config.xml /var/lib/jenkins/config.xml
 COPY admin_config.xml ${JENKINS_HOME}/users/admin/config.xml
+COPY job_jenkins_config.xml ${JENKINS_HOME}/jobs/ol-Jenkins/config.xml
 RUN ln -s /var/lib/jenkins/war/WEB-INF/jenkins-cli.jar jenkins-cli.jar
 ADD http://updates.jenkins-ci.org/latest/git.hpi ${JENKINS_HOME}/plugins/
 ADD http://updates.jenkins-ci.org/latest/junit.hpi ${JENKINS_HOME}/plugins/
