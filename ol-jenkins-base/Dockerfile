@@ -1,4 +1,5 @@
 FROM oraclelinux:7-slim
+
 RUN yum-config-manager --enable ol7_addons ol7_developer_EPEL ol7_preview
 
 RUN yum -y install openssl-devel python-devel java-1.8.0-openjdk which unzip wget git && \
