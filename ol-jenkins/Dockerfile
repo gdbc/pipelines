@@ -14,6 +14,8 @@ COPY jenkins_config.xml /var/lib/jenkins/config.xml
 COPY admin_config.xml ${JENKINS_HOME}/users/admin/config.xml
 COPY job_jenkins_config.xml ${JENKINS_HOME}/jobs/ol-Jenkins/config.xml
 COPY rancher-deploy.xml ${JENKINS_HOME}/jobs/rancher-deploy/config.xml
+COPY ol-jenkins-base.xml ${JENKINS_HOME}/jobs/ol-jenkins-base/config.xml 
+COPY ol-slave.xml ${JENKINS_HOME}/jobs/ol-slave/
 COPY rke ${JENKINS_HOME}/
 
 RUN ln -s /var/lib/jenkins/war/WEB-INF/jenkins-cli.jar jenkins-cli.jar
