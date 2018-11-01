@@ -47,5 +47,4 @@ RUN chown -R jenkins.jenkins ${JENKINS_HOME}/plugins
 
 USER jenkins
 ENV USER jenkins
-
 CMD ["java", "-jar", "/usr/lib/jenkins/jenkins.war"]
