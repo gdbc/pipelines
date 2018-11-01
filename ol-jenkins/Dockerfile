@@ -3,6 +3,7 @@ FROM gra3m3/ol-jenkins-base:latest
 ENV JENKINS_HOME /var/lib/jenkins
 USER jenkins
 WORKDIR ${JENKINS_HOME}
+
 RUN mkdir -p ${JENKINS_HOME}/users/admin
 RUN mkdir -p ${JENKINS_HOME}/jobs/ol-Jenkins/
 RUN mkdir -p ${JENKINS_HOME}/jobs/ol-jenkins-base/
