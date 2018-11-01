@@ -62,6 +62,9 @@ sed -i &quot;s/SERVER3/$SERVER3/g&quot; rancher-cluster.yaml
 
 cat rancher-cluster.yaml</command>
     </hudson.tasks.Shell>
+    <hudson.tasks.Shell>
+      <command>./rke --help</command>
+    </hudson.tasks.Shell>
   </builders>
   <publishers/>
   <buildWrappers/>
