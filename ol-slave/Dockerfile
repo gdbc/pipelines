@@ -1,4 +1,4 @@
-FROM oraclelinux:ol-jenkins-base
+FROM oraclelinux:7-slim
 
 ARG user=jenkins
 ARG group=jenkins
@@ -39,5 +39,4 @@ RUN sed -i "s/PasswordAuthentication yes/PasswordAuthentication no/g" /etc/ssh/s
 
 # Standard SSH port
 EXPOSE 22
-#CMD ["/usr/sbin/sshd", "-D", "-e"]
 ENTRYPOINT ["setup-sshd"]
