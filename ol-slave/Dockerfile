@@ -1,4 +1,4 @@
-FROM oraclelinux:7-slim
+FROM oraclelinux:ol-jenkins-base
 
 ARG user=jenkins
 ARG group=jenkins
