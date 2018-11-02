@@ -31,8 +31,10 @@ ADD http://updates.jenkins-ci.org/latest/workflow-step-api.hpi ${JENKINS_HOME}/p
 ADD http://updates.jenkins-ci.org/latest/mailer.hpi ${JENKINS_HOME}/plugins/
 ADD http://updates.jenkins-ci.org/latest/ssh.hpi ${JENKINS_HOME}/plugins/
 ADD http://updates.jenkins-ci.org/latest/ssh-credentials.hpi ${JENKINS_HOME}/plugins/
+ADD http://updates.jenkins-ci.org/latest/ssh-steps.hpi ${JENKINS_HOME}/plugins/
 ADD http://updates.jenkins-ci.org/latest/ssh-agent.hpi ${JENKINS_HOME}/plugins/
 ADD http://updates.jenkins-ci.org/latest/jsch.hpi ${JENKINS_HOME}/plugins/
+ADD http://updates.jenkins-ci.org/latest/build-pipeline-plugin.hpi ${JENKINS_HOME}/plugins/
 ADD http://updates.jenkins-ci.org/latest/docker-commons.hpi ${JENKINS_HOME}/plugins/
 ADD http://updates.jenkins-ci.org/latest/apache-httpcomponents-client-4-api.hpi ${JENKINS_HOME}/plugins/
 ADD http://updates.jenkins-ci.org/latest/token-macro.hpi ${JENKINS_HOME}/plugins/
