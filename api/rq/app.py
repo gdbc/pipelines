@@ -31,22 +31,22 @@ def get_randrange():
 
 
 
-#@app.route("/results")
-#@app.route("/results/<string:job_id>")
-#def get_results(job_id=None):
-#
-#    if job_id is None:
-#        return jsonify(queued_job_ids=q.job_ids)
-#
-#    job = q.fetch_job(job_id)
-#
-#    if job.is_failed:
-#        return 'Job has failed!', 400
-#
-#    if job.is_finished:
-#        return jsonify(result=job.result)
-#
-#    return 'Job has not finished!', 202
+@app.route("/results")
+@app.route("/results/<string:job_id>")
+def get_results(job_id=None):
+
+    if job_id is None:
+       return jsonify(queued_job_ids=q.job_ids)
+
+    job = q.fetch_job(job_id)
+
+    if job.is_failed:
+        return 'Job has failed!', 400
+
+    if job.is_finished:
+        return jsonify(result=job.result)
+
+    return 'Job has not finished!', 202
 
 if __name__ == '__main__':
     # Start server
