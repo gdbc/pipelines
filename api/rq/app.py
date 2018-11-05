@@ -6,7 +6,7 @@ from sums import add
 
 from random import randrange
 
-REDIS_HOST="localhost"
+REDIS_HOST="172.17.0.1"
 REDIS_PORT="6379"
 
 
