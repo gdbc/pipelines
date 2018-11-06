@@ -3,6 +3,8 @@ from flask import Flask, jsonify, request
 from redis import StrictRedis
 from rq import Queue
 from sums import add
+from vmcreate import build_system
+from checksvc import check_svc
 
 from random import randrange
 
@@ -14,8 +16,6 @@ app = Flask(__name__)
 
 q = Queue('default',connection=StrictRedis(host=REDIS_HOST, port=REDIS_PORT))
 
-
-
 @app.route('/')
 def get_randrange():
 
@@ -25,11 +25,23 @@ def get_randrange():
     job = q.enqueue(add, one, two)
     job_id = job.get_id()
     return job_id
-    #return hello
 
-    #return jsonify(job_id=job.get_id())
+@app.route("/checkservice")
+def check_service():
+    vm = request.args.get("vmname")
+    sv    = request.args.get("svc")
+    print("%s %s" %(vm,sv))
+    job = q.enqueue(check_svc, vm, sv)
+    job_id = job.get_id()
+    return job_id
 
+@app.route("/buildvm")
+def create_vm():
 
+    vmname = request.args.get('vmname')
+    job = q.enqueue(build_system, vmname)
+    job_id = job.get_id()
+    return job_id
 
 @app.route("/results")
 @app.route("/results/<string:job_id>")
