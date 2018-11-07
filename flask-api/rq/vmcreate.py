@@ -63,8 +63,8 @@ def build_system(vmname):
               time.sleep(10)
               TOTAL_WAIT+=10
            if TOTAL_WAIT > 300:
-              return vmname + "=failed"
-    return vmname + "=up"
+              return "failed"
+    return "success"
     
            
 
