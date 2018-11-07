@@ -39,7 +39,7 @@ def check_service():
 def create_vm():
 
     vmname = request.args.get('vmname')
-    job = q.enqueue(build_system, vmname)
+    job = q.enqueue(build_system, vmname,timeout=600)
     job_id = job.get_id()
     return job_id
 
