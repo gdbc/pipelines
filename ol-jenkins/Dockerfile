@@ -58,6 +58,8 @@ ADD http://updates.jenkins-ci.org/latest/plain-credentials.hpi ${JENKINS_HOME}/p
 
 USER root
 RUN chown -R jenkins.jenkins ${JENKINS_HOME}/plugins
+RUN chown -R jenkins.jenkins ${JENKINS_HOME}/rke
+RUN chmod 755 ${JENKINS_HOME}/rke
 
 USER jenkins
 ENV USER jenkins
