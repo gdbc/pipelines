@@ -17,10 +17,6 @@ COPY rancher-deploy.xml ${JENKINS_HOME}/jobs/rancher-deploy/config.xml
 COPY ol-jenkins-base.xml ${JENKINS_HOME}/jobs/ol-jenkins-base/config.xml 
 COPY ol-slave.xml ${JENKINS_HOME}/jobs/ol-slave/config.xml
 COPY rke ${JENKINS_HOME}/
-COPY scp.py /usr/local/bin/
-
-
-RUN chmod 755 /usr/local/bin/scp.py
 RUN ln -s /var/lib/jenkins/war/WEB-INF/jenkins-cli.jar jenkins-cli.jar
 ADD http://updates.jenkins-ci.org/latest/git.hpi ${JENKINS_HOME}/plugins/
 ADD http://updates.jenkins-ci.org/latest/publish-over-ssh.hpi ${JENKINS_HOME}/plugins/
@@ -63,6 +59,8 @@ USER root
 RUN chown -R jenkins.jenkins ${JENKINS_HOME}/plugins
 RUN chown -R jenkins.jenkins ${JENKINS_HOME}/rke
 RUN chmod 755 ${JENKINS_HOME}/rke
+COPY scp.py /usr/local/bin/
+RUN chmod 755 /usr/local/bin/scp.py
 
 USER jenkins
 ENV USER jenkins
