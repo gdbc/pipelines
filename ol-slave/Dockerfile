@@ -28,7 +28,7 @@ RUN sed -i 's|session    required     pam_loginuid.so|session    optional     pa
 COPY setup-sshd /usr/local/bin/
 COPY scp.py /usr/local/bin/
 RUN chmod 777 /usr/local/bin/setup-sshd
-RUN chmod 755 /usr/local/bin/setup-sshd
+RUN chmod 755 /usr/local/bin/scp.py
 RUN mkdir /home/jenkins/jdk/bin/ -p
 RUN mkdir /root/jdk/bin/ -p
 RUN ln -s /usr/lib/jvm/jre-1.8.0-openjdk/bin/java /home/jenkins/jdk/bin/java
