@@ -20,13 +20,15 @@ RUN chown -R ${user}:${user} /home/${user}
 
 
 RUN cd /etc/yum.repos.d/ && sed -i '0,/addons/! {0,/enabled=0/ s/enabled=0/enabled=1/}' public-yum-ol7.repo
-RUN yum install -y openssh-server git unzip zip docker java-1.8.0-openjdk.x86_64 java-1.8.0-openjdk.i686 && yum clean all
+RUN yum install -y openssh-server git unzip zip docker java-1.8.0-openjdk.x86_64 java-1.8.0-openjdk.i686 python-paramiko && yum clean all
 # update sshd settings, create jenkins user, set jenkins user pw, generate ssh keys
 RUN sed -i 's|session    required     pam_loginuid.so|session    optional     pam_loginuid.so|g' /etc/pam.d/sshd \
     && mkdir -p /var/run/sshd \
     && /usr/bin/ssh-keygen -A  
 COPY setup-sshd /usr/local/bin/
+COPY scp.py /usr/local/bin/
 RUN chmod 777 /usr/local/bin/setup-sshd
+RUN chmod 755 /usr/local/bin/setup-sshd
 RUN mkdir /home/jenkins/jdk/bin/ -p
 RUN mkdir /root/jdk/bin/ -p
 RUN ln -s /usr/lib/jvm/jre-1.8.0-openjdk/bin/java /home/jenkins/jdk/bin/java
