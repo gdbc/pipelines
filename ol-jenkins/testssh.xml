@@ -21,7 +21,7 @@
         <hudson.model.PasswordParameterDefinition>
           <name>SSH_HOST_PASS</name>
           <description></description>
-          <defaultValue>{AQAAABAAAAAQhqcbMUwpijJ2ZWs8mE4QNnNxVCHwFdsx4lfbn04UGZk=}</defaultValue>
+          <defaultValue>{AQAAABAAAAAQplzw0K6fCSrL6G3kwG80rHfXBOlmowxwG+BvcUgSnZI=}</defaultValue>
         </hudson.model.PasswordParameterDefinition>
       </parameterDefinitions>
     </hudson.model.ParametersDefinitionProperty>
@@ -36,7 +36,16 @@
   <builders>
     <hudson.tasks.Shell>
       <command>/usr/local/bin/scp.py
-cat /tmp/id_rsa</command>
+cat /tmp/id_rsa
+mkdir .ssh/
+cp /tmp/id_rsa .ssh/
+chmod 600 .ssh/id_rsa
+alias ssh=&apos;ssh -i .ssh/id_rsa&apos;
+alias scp=&apos;scp -i .ssh/id_rsa&apos;
+ssh centos@rancher101 ls
+ssh centos@rancher102 ls
+ssh centos@rancher103 ls
+</command>
     </hudson.tasks.Shell>
   </builders>
   <publishers/>
