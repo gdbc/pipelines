@@ -56,14 +56,31 @@
   <concurrentBuild>false</concurrentBuild>
   <builders>
     <hudson.tasks.Shell>
-      <command>sed -i &quot;s/SERVER1/$SERVER1/g&quot; rancher-cluster.yaml
+      <command>
+sed -i &quot;s/SERVER1/$SERVER1/g&quot; rancher-cluster.yaml
 sed -i &quot;s/SERVER2/$SERVER2/g&quot; rancher-cluster.yaml
 sed -i &quot;s/SERVER3/$SERVER3/g&quot; rancher-cluster.yaml
 
 cat rancher-cluster.yaml</command>
     </hudson.tasks.Shell>
     <hudson.tasks.Shell>
-      <command>./rke --help</command>
+      <command>#Make sure proxy is not configured on Container Hosts
+ls
+pwd
+./rke up --config rancher-cluster.yml
+KUBECONFIG=$(pwd)/kube_config_rancher-cluster.yaml
+kubectl get nodes
+sleep 10
+kubectl get pods --all-namespaces
+sleep 20
+kubectl get pods --all-namespaces
+sleep 30
+kubectl get pods --all-namespaces
+
+</command>
+    </hudson.tasks.Shell>
+    <hudson.tasks.Shell>
+      <command>cat kube_config_rancher-cluster.yaml</command>
     </hudson.tasks.Shell>
   </builders>
   <publishers/>
