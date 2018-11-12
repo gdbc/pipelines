@@ -19,6 +19,7 @@ COPY ol-slave.xml ${JENKINS_HOME}/jobs/ol-slave/config.xml
 COPY rke ${JENKINS_HOME}/
 RUN ln -s /var/lib/jenkins/war/WEB-INF/jenkins-cli.jar jenkins-cli.jar
 ADD http://updates.jenkins-ci.org/latest/git.hpi ${JENKINS_HOME}/plugins/
+ADD http://updates.jenkins-ci.org/latest/python.hpi ${JENKINS_HOME}/plugins/
 ADD http://updates.jenkins-ci.org/latest/publish-over-ssh.hpi ${JENKINS_HOME}/plugins/
 ADD http://updates.jenkins-ci.org/latest/junit.hpi ${JENKINS_HOME}/plugins/
 ADD http://updates.jenkins-ci.org/latest/scm-api.hpi ${JENKINS_HOME}/plugins/
