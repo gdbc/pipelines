@@ -8,14 +8,18 @@ RUN mkdir -p ${JENKINS_HOME}/users/admin
 RUN mkdir -p ${JENKINS_HOME}/jobs/ol-Jenkins/
 RUN mkdir -p ${JENKINS_HOME}/jobs/ol-jenkins-base/
 RUN mkdir -p ${JENKINS_HOME}/jobs/ol-slave/
-RUN mkdir -p ${JENKINS_HOME}/jobs/rancher-deploy
+RUN mkdir -p ${JENKINS_HOME}/jobs/rancher-deploy/
+RUN mkdir -p ${JENKINS_HOME}/jobs/build-host/
+RUN mkdir -p ${JENKINS_HOME}/jobs/testssh/
 
 COPY jenkins_config.xml /var/lib/jenkins/config.xml
+COPY testssh.xml ${JENKINS_HOME}/jobs/testssh/config.xml
 COPY admin_config.xml ${JENKINS_HOME}/users/admin/config.xml
 COPY job_jenkins_config.xml ${JENKINS_HOME}/jobs/ol-Jenkins/config.xml
 COPY rancher-deploy.xml ${JENKINS_HOME}/jobs/rancher-deploy/config.xml
 COPY ol-jenkins-base.xml ${JENKINS_HOME}/jobs/ol-jenkins-base/config.xml 
 COPY ol-slave.xml ${JENKINS_HOME}/jobs/ol-slave/config.xml
+COPY build-host.xml ${JENKINS_HOME}/jobs/build-host/config.xml
 COPY rke ${JENKINS_HOME}/
 RUN ln -s /var/lib/jenkins/war/WEB-INF/jenkins-cli.jar jenkins-cli.jar
 ADD http://updates.jenkins-ci.org/latest/git.hpi ${JENKINS_HOME}/plugins/
