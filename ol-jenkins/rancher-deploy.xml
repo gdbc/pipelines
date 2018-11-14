@@ -96,8 +96,8 @@ alias ssh=&apos;ssh -i .ssh/id_rsa -oStrictHostKeyChecking=no&apos;</command>
 ls
 pwd
 ./rke up --config rancher-cluster.yaml
-KUBECONFIG=$(pwd)/kube_config_rancher-cluster.yaml
-kubectl get nodes
+#KUBECONFIG=$(pwd)/kube_config_rancher-cluster.yaml
+kubectl --kubeconfig $(pwd)/kube_config_rancher-cluster.yaml get nodes
 sleep 10
 kubectl get pods --all-namespaces
 sleep 20
