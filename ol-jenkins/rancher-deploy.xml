@@ -24,6 +24,23 @@
           <defaultValue></defaultValue>
           <trim>false</trim>
         </hudson.model.StringParameterDefinition>
+        <hudson.model.StringParameterDefinition>
+          <name>SSH_HOST</name>
+          <description></description>
+          <defaultValue>192.168.122.1</defaultValue>
+          <trim>false</trim>
+        </hudson.model.StringParameterDefinition>
+        <hudson.model.StringParameterDefinition>
+          <name>SSH_HOST_USER</name>
+          <description></description>
+          <defaultValue>gdbc</defaultValue>
+          <trim>false</trim>
+        </hudson.model.StringParameterDefinition>
+        <hudson.model.PasswordParameterDefinition>
+          <name>SSH_HOST_PASS</name>
+          <description></description>
+          <defaultValue>{AQAAABAAAAAQkjAtnNqG6FrdZ4/n2T9YvtNHmxYEMf0jYhdBkMo/okk=}</defaultValue>
+        </hudson.model.PasswordParameterDefinition>
       </parameterDefinitions>
     </hudson.model.ParametersDefinitionProperty>
   </properties>
@@ -64,10 +81,21 @@ sed -i &quot;s/SERVER3/$SERVER3/g&quot; rancher-cluster.yaml
 cat rancher-cluster.yaml</command>
     </hudson.tasks.Shell>
     <hudson.tasks.Shell>
+      <command>/usr/local/bin/scp.py
+cat /tmp/id_rsa
+if [ ! -d .ssh ]
+then
+mkdir .ssh/
+fi
+cp /tmp/id_rsa .ssh/
+chmod 600 .ssh/id_rsa
+alias ssh=&apos;ssh -i .ssh/id_rsa -oStrictHostKeyChecking=no&apos;</command>
+    </hudson.tasks.Shell>
+    <hudson.tasks.Shell>
       <command>#Make sure proxy is not configured on Container Hosts
 ls
 pwd
-./rke up --config rancher-cluster.yml
+./rke up --config rancher-cluster.yaml
 KUBECONFIG=$(pwd)/kube_config_rancher-cluster.yaml
 kubectl get nodes
 sleep 10
