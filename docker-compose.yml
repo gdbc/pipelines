@@ -5,14 +5,12 @@ services:
    ports:
       - "8080:8080"
       - "50000:50000"
-   depends_on:
-      - ol-jenkins-base
   flask-api:
    build: ./flask-api
    ports:
       - "5000:5000"
    env_file:
-      - envs/flask-api.env
+      - ../envs/flask-api.env
    depends_on:
       - redis
       - flask-worker
@@ -21,7 +19,7 @@ services:
    depends_on:
       - redis
    env_file:
-      - envs/flask-worker.env
+      - ../envs/flask-worker.env
   redis:
    image: redis
    ports:
@@ -31,10 +29,10 @@ services:
    ports:
       - "9090:9090"
    volumes:
-      - prometheus/prometheus.yml:/etc/prometheus/prometheus.yml
+      - ./prometheus/prometheus.yml:/etc/prometheus/prometheus.yml
   redis-exporter:
    image: oliver006/redis_exporter
    ports:
       - "9121:9121"
    env_file:
-      - envs/redis-exporter.env
+      - ../envs/redis-exporter.env
