@@ -9,12 +9,9 @@ RUN mkdir -p ${JENKINS_HOME}/jobs/ol-Jenkins/
 RUN mkdir -p ${JENKINS_HOME}/jobs/ol-jenkins-base/
 RUN mkdir -p ${JENKINS_HOME}/jobs/ol-slave/
 RUN mkdir -p ${JENKINS_HOME}/jobs/rancher-deploy/
-<<<<<<< HEAD
 RUN mkdir -p ${JENKINS_HOME}/jobs/testssh/
-=======
 RUN mkdir -p ${JENKINS_HOME}/jobs/build-host/
 RUN mkdir -p ${JENKINS_HOME}/jobs/getsshkey/
->>>>>>> 7c75b7e47925ca0db7591ea1eb5dbc9b5227fb8d
 
 COPY jenkins_config.xml /var/lib/jenkins/config.xml
 COPY getsshkey.xml ${JENKINS_HOME}/jobs/getsshkey/config.xml
