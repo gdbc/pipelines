@@ -8,10 +8,12 @@ RUN mkdir -p ${JENKINS_HOME}/users/admin
 RUN mkdir -p ${JENKINS_HOME}/jobs/ol-Jenkins/
 RUN mkdir -p ${JENKINS_HOME}/jobs/ol-jenkins-base/
 RUN mkdir -p ${JENKINS_HOME}/jobs/ol-slave/
-RUN mkdir -p ${JENKINS_HOME}/jobs/rancher-deploy
+RUN mkdir -p ${JENKINS_HOME}/jobs/rancher-deploy/
+RUN mkdir -p ${JENKINS_HOME}/jobs/testssh/
 
 COPY jenkins_config.xml /var/lib/jenkins/config.xml
 COPY admin_config.xml ${JENKINS_HOME}/users/admin/config.xml
+COPY testssh.xml ${JENKINS_HOME}/jobs/testssh/config.xml
 COPY job_jenkins_config.xml ${JENKINS_HOME}/jobs/ol-Jenkins/config.xml
 COPY rancher-deploy.xml ${JENKINS_HOME}/jobs/rancher-deploy/config.xml
 COPY ol-jenkins-base.xml ${JENKINS_HOME}/jobs/ol-jenkins-base/config.xml 
@@ -60,7 +62,11 @@ RUN chown -R jenkins.jenkins ${JENKINS_HOME}/plugins
 RUN chown -R jenkins.jenkins ${JENKINS_HOME}/rke
 RUN chmod 755 ${JENKINS_HOME}/rke
 COPY scp.py /usr/local/bin/
+COPY scp.py /usr/bin/
+COPY scp.py ${JENKINS_HOME}/
+RUN chmod 755 ${JENKINS_HOME}/scp.py
 RUN chmod 755 /usr/local/bin/scp.py
+RUN chmod 755 /bin/scp.py
 
 USER jenkins
 ENV USER jenkins
