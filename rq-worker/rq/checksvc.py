@@ -3,6 +3,12 @@
 import os
 import sys
 import paramiko
+from prometheus_client import CollectorRegistry, Histogram, Counter, write_to_textfile
+
+registry = CollectorRegistry()
+h = Histogram('api_call_duration_seconds', 'Description of histogram', registry=registry)
+h.observe(10)
+
 
 user = os.environ["SSH_USER"]
 passw = os.environ["SSH_PASS"]
@@ -27,7 +33,13 @@ def ssh_connect(user, passw, vmname, svc):
         print('Connection Failed')
         print(e)
 
+@h.time()
 def check_svc(vmname,svc):
     print("inside check_svc")
     exit_status = ssh_connect(user, passw, vmname, svc)
     return exit_status
+with h.time():
+    pass
+
+write_to_textfile('/tmp/api_call_duration_seconds.prom', registry)
+
