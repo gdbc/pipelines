@@ -11,6 +11,8 @@ RUN groupadd -g ${gid} ${group} \
 
 COPY rq/worker.py ${FLASK_HOME}
 COPY rq/sums.py ${FLASK_HOME}
+COPY rq/checksvc.py ${FLASK_HOME}
+COPY rq/vmcreate.py ${FLASK_HOME}
 RUN cd /etc/yum.repos.d/ && sed -i '0,/addons/! {0,/enabled=0/ s/enabled=0/enabled=1/}' public-yum-ol7.repo
 WORKDIR ${FLASK_HOME}
 RUN chown ${user}:${group} worker.py
@@ -19,7 +21,7 @@ RUN wget https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm
 RUN rpm -vih epel-release* 
 RUN yum install python-flask python-redis python2-pip -y && yum clean all
 RUN pip install --upgrade pip
-RUN pip install rq
+RUN pip install rq paramiko
 
 
 # Standard Flask port

@@ -9,7 +9,7 @@
         <hudson.model.StringParameterDefinition>
           <name>SSH_HOST</name>
           <description></description>
-          <defaultValue>192.168.133.1</defaultValue>
+          <defaultValue>192.168.122.1</defaultValue>
           <trim>false</trim>
         </hudson.model.StringParameterDefinition>
         <hudson.model.StringParameterDefinition>
@@ -21,7 +21,7 @@
         <hudson.model.PasswordParameterDefinition>
           <name>SSH_HOST_PASS</name>
           <description></description>
-          <defaultValue>{AQAAABAAAABAxFu/YaJRIKNhaLvC9ZYAgcQXS6rc6rA+TcNboeYM7cMdKOeDenu7CdEZ/bbm6mQPESXprYOqUsCk5cVztd+36VW3XIaWg7tIxG4OO7TwOdU=}</defaultValue>
+          <defaultValue>{AQAAABAAAAAQMcz3ubAsTk0ojeTR5TkxzxzzfGg9689AeXgWyIVkZvA=}</defaultValue>
         </hudson.model.PasswordParameterDefinition>
       </parameterDefinitions>
     </hudson.model.ParametersDefinitionProperty>
@@ -37,14 +37,17 @@
     <hudson.tasks.Shell>
       <command>/usr/local/bin/scp.py
 cat /tmp/id_rsa
+if [ ! -d .ssh/ ]
+then
 mkdir .ssh/
+fi
 cp /tmp/id_rsa .ssh/
 chmod 600 .ssh/id_rsa
 alias ssh=&apos;ssh -i .ssh/id_rsa -oStrictHostKeyChecking=no&apos;
 alias scp=&apos;scp -i .ssh/id_rsa -oStrictHostKeyChecking=no &apos;
-ssh centos@rancher101 ls /tmp/
-ssh centos@rancher102 ls /tmp/
-ssh centos@rancher103 ls /tmp/
+ssh centos@rancher-master ls /tmp/
+#ssh centos@rancher102 ls /tmp/
+#ssh centos@rancher103 ls /tmp/
 </command>
     </hudson.tasks.Shell>
   </builders>
