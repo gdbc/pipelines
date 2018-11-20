@@ -23,6 +23,7 @@ RUN yum install python-flask python-redis python2-pip -y && yum clean all
 RUN pip install --upgrade pip
 RUN pip install rq
 RUN pip install paramiko
+RUN pip install prometheus_client
 
 
 # Standard Flask port

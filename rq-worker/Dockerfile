@@ -21,7 +21,7 @@ RUN wget https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm
 RUN rpm -vih epel-release* 
 RUN yum install python-flask python-redis python2-pip -y && yum clean all
 RUN pip install --upgrade pip
-RUN pip install rq paramiko
+RUN pip install rq paramiko prometheus_client
 
 
 # Standard Flask port
