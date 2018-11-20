@@ -60,6 +60,12 @@ def get_results(job_id=None):
 
     return 'Job has not finished!', 202
 
+@app.route("/metrics")
+def get_metrics():
+    metrics = open("/tmp/api_call_duration_seconds.prom","r").read()
+    return metrics
+
+
 if __name__ == '__main__':
     # Start server
     app.run(host='0.0.0.0', port=5000, debug=True)
