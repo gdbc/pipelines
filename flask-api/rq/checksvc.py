@@ -15,8 +15,7 @@ s.observe(60)
 
 c = Counter('check_svc_counter', 'Counter for check_svc function', ['method', 'endpoint'], registry=registry)
 
-g = Gauge('check_svc_counter_gauge', 'Gauge for check_svc function', registry=registry)
-g.set_to_current_time()
+g = Gauge('check_svc_counter_gauge', 'Gauge for check_svc function',['method', 'endpoint'], registry=registry)
 
 user  = os.environ["SSH_USER"]
 passw = os.environ["SSH_PASS"]
