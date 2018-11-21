@@ -13,6 +13,7 @@ COPY rq/worker.py ${FLASK_HOME}
 COPY rq/sums.py ${FLASK_HOME}
 COPY rq/checksvc.py ${FLASK_HOME}
 COPY rq/vmcreate.py ${FLASK_HOME}
+COPY rq/get_mets.py ${FLASK_HOME}
 RUN cd /etc/yum.repos.d/ && sed -i '0,/addons/! {0,/enabled=0/ s/enabled=0/enabled=1/}' public-yum-ol7.repo
 WORKDIR ${FLASK_HOME}
 RUN chown ${user}:${group} worker.py

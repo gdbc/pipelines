@@ -6,6 +6,7 @@ from sums import add
 from vmcreate import build_system
 from checksvc import check_svc
 from flask_prometheus import monitor 
+from get_mets import mets
 
 from random import randrange
 
@@ -63,8 +64,8 @@ def get_results(job_id=None):
 
 @app.route("/metrics")
 def get_metrics():
-    metrics = open("/tmp/api_call_duration_seconds.prom","r").read()
-    return metrics
+    #metrics = open("/tmp/api_call_duration_seconds.prom","r").read()
+    return mets()
 
 
 if __name__ == '__main__':

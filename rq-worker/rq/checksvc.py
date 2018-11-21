@@ -8,14 +8,14 @@ from prometheus_client import CollectorRegistry, Summary, Gauge, Histogram, Coun
 registry = CollectorRegistry()
 
 h = Histogram('check_svc_api_call_duration_seconds_histogram', 'Histogram for check_svc function', registry=registry)
-h.observe(60)
+h.observe(5)
 
 s = Summary('check_svc_api_call_duration_seconds_summary', 'Summary for check_svc function', registry=registry)
-s.observe(60)
+s.observe(5)
 
 c = Counter('check_svc_counter', 'Counter for check_svc function', ['method', 'endpoint'], registry=registry)
+g = Gauge('check_svc_gauge', 'Gauge for check_svc function',['method', 'endpoint'], registry=registry)
 
-g = Gauge('check_svc_counter_gauge', 'Gauge for check_svc function',['method', 'endpoint'], registry=registry)
 
 user  = os.environ["SSH_USER"]
 passw = os.environ["SSH_PASS"]
@@ -43,13 +43,11 @@ def ssh_connect(user, passw, vmname, svc):
 @h.time()
 @s.time()
 def check_svc(vmname,svc):
-    label_dict = {"method": 'checkservice', "endpoint":'endpoint'}
-    label_gdict = {"method": 'checkservice', "endpoint":'endpoint'}
-    c.labels(**label_dict).inc()
-    g.labels(**label_gdict).inc()
-    print("inside check_svc")
+    label_dict = {"method": 'check_svc', "endpoint":'checkservice'}
+    c.labels(**label_dict).inc(1)
+    g.labels(**label_dict).inc(1)
+    write_to_textfile('/data/api_call_duration_seconds.prom', registry)
     exit_status = ssh_connect(user, passw, vmname, svc)
     return exit_status
 
 
-write_to_textfile('/tmp/api_call_duration_seconds.prom', registry)
