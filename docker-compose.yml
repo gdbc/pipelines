@@ -10,6 +10,8 @@ services:
    ports:
       - "5000:5000"
       - "8000:8000"
+   volumes:
+      - ../data:/data
    env_file:
       - ../envs/flask-api.env
    depends_on:
@@ -19,6 +21,8 @@ services:
    build: ./rq-worker
    depends_on:
       - redis
+   volumes:
+      - ../data:/data
    env_file:
       - ../envs/flask-worker.env
   redis:
