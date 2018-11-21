@@ -5,6 +5,7 @@ from rq import Queue
 from sums import add
 from vmcreate import build_system
 from checksvc import check_svc
+from flask_prometheus import monitor 
 
 from random import randrange
 
@@ -68,4 +69,5 @@ def get_metrics():
 
 if __name__ == '__main__':
     # Start server
-    app.run(host='0.0.0.0', port=5000, debug=True)
+    monitor(app, port=8000)
+    app.run(host='0.0.0.0', port=5000)

@@ -13,11 +13,9 @@ h.observe(60)
 s = Summary('check_svc_api_call_duration_seconds_summary', 'Summary for check_svc function', registry=registry)
 s.observe(60)
 
-c = Counter('check_svc_counter', 'Counter for check_svc function', registry=registry)
-c.inc()
+c = Counter('check_svc_counter', 'Counter for check_svc function', ['method', 'endpoint'], registry=registry)
 
 g = Gauge('check_svc_counter_gauge', 'Gauge for check_svc function', registry=registry)
-g.inc()
 g.set_to_current_time()
 
 user  = os.environ["SSH_USER"]
@@ -43,24 +41,16 @@ def ssh_connect(user, passw, vmname, svc):
         print('Connection Failed')
         print(e)
 
-@g.track_inprogress()
-@c.count_exceptions()
 @h.time()
+@s.time()
 def check_svc(vmname,svc):
+    label_dict = {"method": 'checkservice', "endpoint":'endpoint'}
+    label_gdict = {"method": 'checkservice', "endpoint":'endpoint'}
+    c.labels(**label_dict).inc()
+    g.labels(**label_gdict).inc()
     print("inside check_svc")
     exit_status = ssh_connect(user, passw, vmname, svc)
     return exit_status
 
-with h.time():
-    pass
-
-with c.count_exceptions():
-    pass
-
-with g.track_inprogress():
-    pass
-
-with s.time():
-    pass
 
 write_to_textfile('/tmp/api_call_duration_seconds.prom', registry)
