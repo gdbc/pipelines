@@ -1,5 +1,6 @@
 #!/usr/bin/python3.4
-from flask import Flask, jsonify, request
+import prometheus_client
+from flask import Flask, jsonify, request, Response
 from redis import StrictRedis
 from rq import Queue
 from sums import add
@@ -12,6 +13,8 @@ from random import randrange
 
 REDIS_HOST="172.17.0.1"
 REDIS_PORT="6379"
+
+CONTENT_TYPE_LATEST = str('text/plain; version=0.0.4; charset=utf-8')
 
 
 app = Flask(__name__)
@@ -64,8 +67,9 @@ def get_results(job_id=None):
 
 @app.route("/metrics")
 def get_metrics():
-    #metrics = open("/tmp/api_call_duration_seconds.prom","r").read()
-    return mets()
+    mets()
+    #return prometheus_client.generate_latest()
+    return Response(prometheus_client.generate_latest(), mimetype='text/plain')
 
 
 if __name__ == '__main__':
