@@ -29,4 +29,7 @@ scrape_configs:
     - targets: ['localhost:9090']
   - job_name: redis_exporter
     static_configs:
-    - targets: ['dhost:9121']
+    - targets: ['192.168.122.133:9121']
+  - job_name: check_service
+    static_configs:
+    - targets: ['192.168.122.133:5000']
