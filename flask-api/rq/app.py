@@ -23,7 +23,6 @@ q = Queue('default',connection=StrictRedis(host=REDIS_HOST, port=REDIS_PORT))
 
 @app.route('/')
 def get_randrange():
-
     one = request.args.get('one')
     two = request.args.get('two')
     #job = q.enqueue(randrange, start, stop, step, result_ttl=5000)
@@ -67,7 +66,7 @@ def get_results(job_id=None):
 
 @app.route("/metrics")
 def get_metrics():
-    mets()
+    mets('default')
     #return prometheus_client.generate_latest()
     return Response(prometheus_client.generate_latest(), mimetype='text/plain')
 

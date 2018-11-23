@@ -7,7 +7,9 @@ from redis import StrictRedis
 from prometheus_client import Counter, Histogram
 
 
-REQUEST_LATENCY = Histogram('finished_request_latency_seconds', 'Finished Request Latency', ['app_name', 'endpoint'], buckets=range(1,60))
+#REQUEST_LATENCY = Histogram('finished_request_latency_seconds', 'Finished Request Latency', ['app_name', 'endpoint'], buckets=range(1,60))
+
+REQUEST_LATENCY = Histogram('finished_request_latency_seconds', 'Finished Request Latency', ['app_name', 'endpoint'],buckets=[ round(x * 0.1, 1) for x in range(0, 10)])
 
 REDIS_HOST = '172.17.0.1'
 REDIS_PORT = '6379'
@@ -15,8 +17,8 @@ REDIS_PORT = '6379'
 CON  = StrictRedis(host=REDIS_HOST, port=REDIS_PORT)
 
 
-def mets():
-   REG  = registry.FinishedJobRegistry('default', connection=CON)
+def mets(queue_name):
+   REG  = registry.FinishedJobRegistry(queue_name, connection=CON)
    JOBS = REG.get_job_ids()
 
    for job_num in JOBS:
@@ -31,4 +33,15 @@ def mets():
       #print "job status: ", job.status
       #print "job result: ", job.result
       REQUEST_LATENCY.labels('web_api', job.func_name).observe(duration.total_seconds())
+ 
+   rm_queue(queue_name)
    return REQUEST_LATENCY
+
+def rm_queue(queue_name):
+   REG  = registry.FinishedJobRegistry(queue_name, connection=CON)
+
+   if REG.count > 0:
+      JOBS = REG.get_job_ids()
+      for job_num in JOBS:
+         job = Job.fetch(job_num, connection=CON)
+         job.delete()
