@@ -19,6 +19,6 @@ for job_num in JOBS:
    duration = finish - start
    print "job number: ", job_num
    print "job function name: ", job.func_name
-   print "job duration: ", duration.microseconds 
+   print "job duration: ", duration.total_seconds()
    print "job status: ", job.status
    print "job result: ", job.result
