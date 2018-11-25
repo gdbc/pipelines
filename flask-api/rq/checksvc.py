@@ -11,7 +11,7 @@ registry = CollectorRegistry()
 #h.observe(5)
 
 #s = Summary('check_svc_api_call_duration_seconds_summary', 'Summary for check_svc function', registry=registry)
-s.observe(5)
+#s.observe(5)
 
 #c = Counter('check_svc_counter', 'Counter for check_svc function', ['method', 'endpoint'], registry=registry)
 #g = Gauge('check_svc_gauge', 'Gauge for check_svc function',['method', 'endpoint'], registry=registry)

@@ -7,14 +7,14 @@ from prometheus_client import CollectorRegistry, Summary, Gauge, Histogram, Coun
 
 registry = CollectorRegistry()
 
-h = Histogram('check_svc_api_call_duration_seconds_histogram', 'Histogram for check_svc function', registry=registry)
-h.observe(5)
+#h = Histogram('check_svc_api_call_duration_seconds_histogram', 'Histogram for check_svc function', registry=registry)
+#h.observe(5)
 
-s = Summary('check_svc_api_call_duration_seconds_summary', 'Summary for check_svc function', registry=registry)
-s.observe(5)
+#s = Summary('check_svc_api_call_duration_seconds_summary', 'Summary for check_svc function', registry=registry)
+#s.observe(5)
 
-c = Counter('check_svc_counter', 'Counter for check_svc function', ['method', 'endpoint'], registry=registry)
-g = Gauge('check_svc_gauge', 'Gauge for check_svc function',['method', 'endpoint'], registry=registry)
+#c = Counter('check_svc_counter', 'Counter for check_svc function', ['method', 'endpoint'], registry=registry)
+#g = Gauge('check_svc_gauge', 'Gauge for check_svc function',['method', 'endpoint'], registry=registry)
 
 
 user  = os.environ["SSH_USER"]
@@ -39,9 +39,8 @@ def ssh_connect(user, passw, vmname, svc):
     except Exception as e:
         print('Connection Failed')
         print(e)
-
-@h.time()
-@s.time()
+#@s.time()
+#@h.time()
 def check_svc(vmname,svc):
     label_dict = {"method": 'check_svc', "endpoint":'checkservice'}
     c.labels(**label_dict).inc(1)
