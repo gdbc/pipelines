@@ -43,8 +43,8 @@ def ssh_connect(user, passw, vmname, svc):
 #@h.time()
 def check_svc(vmname,svc):
     label_dict = {"method": 'check_svc', "endpoint":'checkservice'}
-    c.labels(**label_dict).inc(1)
-    g.labels(**label_dict).inc(1)
+    #c.labels(**label_dict).inc(1)
+    #g.labels(**label_dict).inc(1)
     write_to_textfile('/data/api_call_duration_seconds.prom', registry)
     exit_status = ssh_connect(user, passw, vmname, svc)
     return exit_status

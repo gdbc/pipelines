@@ -11,7 +11,7 @@ from prometheus_client import Counter, Histogram, Summary
 
 REQUEST_LATENCY = Histogram('histogram_request_latency_seconds', 'Histogram Service Check Latency', ['app_name', 'endpoint'],buckets=[ round(x * 0.1, 1) for x in range(0, 10)])
 
-REQUEST_SUMMARY = Summary('summary_request_latency_seconds', 'Summary Service Check Request Latency', ['app_name', 'endpoint'])
+#REQUEST_SUMMARY = Summary('summary_request_latency_seconds', 'Summary Service Check Request Latency', ['app_name', 'endpoint'])
 
 REDIS_HOST = '172.17.0.1'
 REDIS_PORT = '6379'
@@ -34,11 +34,12 @@ def mets(queue_name):
       #print "job duration: ", duration.
       #print "job status: ", job.status
       #print "job result: ", job.result
-      REQUEST_LATENCY.labels('/checkservice', job.func_name).observe(duration.total_seconds())
-      REQUEST_SUMMARY.labels('/checkservice', job.func_name).observe(duration.total_seconds())
+      REQUEST_LATENCY.labels('/cs', job.func_name).observe(duration.total_seconds())
+      #REQUEST_SUMMARY.labels('/cs', job.func_name).observe(duration.total_seconds())
  
    rm_queue(queue_name)
-   return REQUEST_LATENCY, REQUEST_SUMMARY
+   #return REQUEST_LATENCY, REQUEST_SUMMARY
+   return REQUEST_LATENCY
 
 def rm_queue(queue_name):
    REG  = registry.FinishedJobRegistry(queue_name, connection=CON)
