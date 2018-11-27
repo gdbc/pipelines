@@ -8,6 +8,8 @@ from vmcreate import build_system
 from checksvc import check_svc
 from flask_prometheus import monitor 
 from get_mets import mets
+from prometheus_client import Summary
+
 
 from random import randrange
 
@@ -15,6 +17,7 @@ REDIS_HOST="172.17.0.1"
 REDIS_PORT="6379"
 
 CONTENT_TYPE_LATEST = str('text/plain; version=0.0.4; charset=utf-8')
+#REQUEST_TIME = Summary('summary_request_processing_seconds', 'Time spent processing request')
 
 
 app = Flask(__name__)
@@ -30,6 +33,7 @@ def get_randrange():
     job_id = job.get_id()
     return job_id
 
+
 @app.route("/checkservice")
 def check_service():
     vm = request.args.get("vmname")
@@ -39,13 +43,14 @@ def check_service():
     job_id = job.get_id()
     return job_id
 
+
 @app.route("/buildvm")
 def create_vm():
-
     vmname = request.args.get('vmname')
     job = q.enqueue(build_system, vmname,timeout=600)
     job_id = job.get_id()
     return job_id
+
 
 @app.route("/results")
 @app.route("/results/<string:job_id>")
@@ -63,6 +68,7 @@ def get_results(job_id=None):
         return jsonify(result=job.result)
 
     return 'Job has not finished!', 202
+
 
 @app.route("/metrics")
 def get_metrics():
