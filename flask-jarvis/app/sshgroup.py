@@ -1,0 +1,5 @@
+
+
+def addgroup(servername, sshgroup):
+
+

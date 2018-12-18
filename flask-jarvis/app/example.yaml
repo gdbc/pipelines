@@ -1,0 +1,21 @@
+---
+#hiera: hieradata/   business_unit/server_type/environment/fqdn
+#       eg:          b1/lad/dev/dnv-b1-lad00044.dev.msci.org.yaml                    
+#       eg:          it/lspli.yaml
+#       eg:          so/dapp/dev.yaml
+#       eg:          so/dapp/uat.yaml
+
+Classification:
+  classes:
+    - profile::docker::msccdockerhost
+
+mgmt::ssh::server_options:AllowGroups:
+    - M_DRAG_Solutions_AM
+    - M_DRAG_Service_x_esg
+    - M_DRAG_Service_tomcat
+
+exclusions:
+  classes:
+    - profile::firewall::clear
+
+profile::mscidockerhost::hosttype: "development"

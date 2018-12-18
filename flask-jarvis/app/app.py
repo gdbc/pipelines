@@ -4,6 +4,7 @@ from flask import Flask, jsonify, request, Response
 from redis import StrictRedis
 from rq import Queue
 from sums import add
+from sshgroup import addgroup
 from ssh_lib import ssh_run
 from flask_prometheus import monitor 
 from get_mets import mets
@@ -32,11 +33,19 @@ def get_randrange():
     job_id = job.get_id()
     return job_id
 
+@app.route("/addsshgroup")
+def addsshgroup():
+    sname    = request.args.get('servername')
+    sshgroup = request.args.get('sshgroup')
+    result   = addgroup(sname, sshgroup)
+    if result == 0:
+       return "working"
+    else:
+       return "failed"
 
 @app.route("/testssh")
 def create_vm():
     sname = request.args.get('servername')
-    #command = "echo `whoami` >> /tmp/test.txt"
     command = "yum install httpd -y"
     result = ssh_run(sname, command, True)
     if result == 0:

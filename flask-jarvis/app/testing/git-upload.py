@@ -14,6 +14,9 @@ if Path(DEST).is_dir():
     o.pull()
 else:
     repo = git.Repo.clone_from("https://" + USER + ":" + PASS + "@" + SERVER + REPO, DEST)                            
+
+
+
 file = open("/home/flask/pipelines/test.txt","a")
 file.write("hello world\n")
 file.close()
