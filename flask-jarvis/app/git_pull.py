@@ -22,19 +22,11 @@ def pull_git(GIT_DEST=git_dest, GIT_SOURCE=git_source, GIT_REPO=git_repo, GIT_FI
             o.pull()
         else:
             repo = git.Repo.clone_from(GIT_SOURCE, GIT_DEST + GIT_REPO)
-        if not repo.is_dirt():
+        if not repo.is_dirty():
             return True
         else: 
             return False
 
-        #file = open(GIT_DEST + GIT_REPO + GIT_FILE,"a")
-        #file.write("hello w0rld\n")
-        #file.close()
-        #repo.index.add([GIT_DEST + GIT_REPO + GIT_FILE])
-        #repo.index.commit(GIT_COMMENT)
-        #repo.remote("origin").push()
-        #y = repo.remote("origin").push()
-        #print("y: %s" %y)
     except Exception as e:
         print("update_git Exception Caught: %s" %e)
         return "Exception Caught Updating GIT"
