@@ -14,19 +14,21 @@ git_comment = "this is a test commit"
 git_file    = "/test.txt"
 
 
-def push_git(gsource, fullpath, comment=git_comment): 
-    try: 
+def push_git(gsource, fullpath, comment=git_comment):
+    try:
         gs       = gsource
+        print("gs: %s" %gs)
         fpath    = fullpath
+        print("fpath: %s" %fpath)
         gcomment = git_comment
         repo     = git.Repo(gs)
-        if not repo.is_dirt():
-            repo.index.add([fpath])
-            repo.index.commit(IT_COMMENT)
-            repo.remote("origin").push()
-            return True 
+        repo.index.add([fpath])
+        repo.index.commit(gcomment)
+        repo.remote("origin").push()
+        if not repo.is_dirty():
+           return True
         else:
-            return False
+           return False
     except Exception as e:
         print("push_git Exception Caught: %s" %e)
         return "Exception Caught pushing to GIT"

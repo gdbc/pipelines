@@ -15,7 +15,7 @@ def get_servertype(alphanum):
 def name_to_path(servername):
 
     sname        = servername.split("-")
-    base         = "hieradata/"
+    base         = "/hieradata/"
     env          = ""
     bu           = sname[1] 
     server_type  = get_servertype(sname[2])
