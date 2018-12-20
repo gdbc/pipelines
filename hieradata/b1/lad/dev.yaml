@@ -2,15 +2,16 @@
 
 Classification:
   classes:
-    - profile::docker::msccdockerhost
+  - profile::docker::msccdockerhost
 
 mgmt::ssh::server_options:AllowGroups:
-    - M_DRAG_Solutions_AM
-    - M_DRAG_Service_x_esg
-    - M_DRAG_Service_tomcat
+- M_DRAG_Solutions_AM
+- M_DRAG_Service_x_esg
+- M_DRAG_Service_tomcat
 
+- M_DRAG_GDBC
 exclusions:
   classes:
-    - profile::firewall::clear
+  - profile::firewall::clear
 
-profile::mscidockerhost::hosttype: "development"
+profile::mscidockerhost::hosttype: development
