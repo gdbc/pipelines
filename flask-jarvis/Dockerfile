@@ -16,6 +16,8 @@ COPY app/app.py ${FLASK_HOME}
 COPY app/sums.py ${FLASK_HOME}
 COPY app/ssh_lib.py ${FLASK_HOME}
 COPY app/sshgroup.py ${FLASK_HOME}
+COPY app/convert_hname.py ${FLASK_HOME}
+COPY app/update_sshgroup.py ${FLASK_HOME}
 COPY app/git_pull.py ${FLASK_HOME}
 COPY app/git_push.py ${FLASK_HOME}
 COPY app/get_vars.py ${FLASK_HOME}
