@@ -16,9 +16,10 @@ COPY app/app.py ${FLASK_HOME}
 COPY app/sums.py ${FLASK_HOME}
 COPY app/ssh_lib.py ${FLASK_HOME}
 COPY app/sshgroup.py ${FLASK_HOME}
+COPY app/git_pull.py ${FLASK_HOME}
+COPY app/git_push.py ${FLASK_HOME}
 COPY app/get_vars.py ${FLASK_HOME}
 COPY config.json ${FLASK_HOME}
-COPY app/git_pull.py ${FLASK_HOME}
 COPY app/get_mets.py ${FLASK_HOME}
 RUN cd /etc/yum.repos.d/ && sed -i '0,/addons/! {0,/enabled=0/ s/enabled=0/enabled=1/}' public-yum-ol7.repo
 WORKDIR ${FLASK_HOME}

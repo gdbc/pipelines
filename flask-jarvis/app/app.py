@@ -37,7 +37,7 @@ def addsshgroup():
     sname    = request.args.get('servername')
     sshgroup = request.args.get('sshgroup')
     result   = addgroup(sname, sshgroup)
-    if result == 0:
+    if result == True:
        return "working"
     else:
        return "failed"
