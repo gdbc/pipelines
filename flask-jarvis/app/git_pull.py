@@ -22,8 +22,10 @@ def pull_git(GIT_DEST=git_dest, GIT_SOURCE=git_source, GIT_REPO=git_repo, GIT_FI
             o.pull()
         else:
             repo = git.Repo.clone_from(GIT_SOURCE, GIT_DEST + GIT_REPO)
-
-        return repo.is_dirty()
+        if not repo.is_dirt():
+            return True
+        else: 
+            return False
 
         #file = open(GIT_DEST + GIT_REPO + GIT_FILE,"a")
         #file.write("hello w0rld\n")
