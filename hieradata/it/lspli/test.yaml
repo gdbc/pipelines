@@ -10,6 +10,7 @@ mgmt::ssh::server_options:AllowGroups:
 - M_DRAG_Service_tomcat
 
 - TEST-GROUP
+- M_DRAG_GDBC
 exclusions:
   classes:
   - profile::firewall::clear
