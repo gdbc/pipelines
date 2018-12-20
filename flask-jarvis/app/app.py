@@ -1,4 +1,5 @@
 #!/usr/bin/python3.4
+
 import prometheus_client
 from flask import Flask, jsonify, request, Response
 from redis import StrictRedis
@@ -9,8 +10,6 @@ from ssh_lib import ssh_run
 from flask_prometheus import monitor 
 from get_mets import mets
 from prometheus_client import Summary
-
-
 from random import randrange
 
 REDIS_HOST="172.17.0.1"
