@@ -5,6 +5,7 @@ Basic example of a resource server
 
 import six
 import time
+import base64
 import connexion
 from auth_db2 import db
 from connexion.decorators.security import validate_scope
@@ -61,18 +62,24 @@ def decode_token(token):
     except JWTError as e:
         six.raise_from(Unauthorized, e)
 
+def decode_basic(basic):
+   try:
+       return base64.b64decode(basic.decode("utf-8")).split(':')[0]
+   except Exception as e:
+       return "Error: ",e 
 
 def get_secret(user, token_info) -> str:
-    return connexion.request.headers['Authorization']
+    token = connexion.request.headers['Authorization'].split()[1]
+    return jwt.decode(token, JWT_SECRET, algorithms=[JWT_ALGORITHM])
     return '''
     You are user_id {user} and the secret is 'wbevuec'.
     Decoded token claims: {token_info}.
     '''.format(user=user, token_info=token_info)
 
 def ssh():
-    headers = connexion.request.headers['Authorization']
-    return headers
-    return "the secret is x"
+    headers = connexion.request.headers['Authorization'].split()[1].strip()
+    username =  base64.b64encode(base64.b64decode(headers).split(":")[0])
+    return userpass
 
 def _current_timestamp() -> int:
     return int(time.time())
