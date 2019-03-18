@@ -26,7 +26,6 @@ def generate_token(user_id):
         "iat": int(timestamp),
         "exp": int(timestamp + JWT_LIFETIME_SECONDS),
         "sub": str(user_id),
-        #"sub": str(12),
     }
 
     return jwt.encode(payload, JWT_SECRET, algorithm=JWT_ALGORITHM)
@@ -76,19 +75,15 @@ def get_secret(user, token_info) -> str:
     Decoded token claims: {token_info}.
     '''.format(user=user, token_info=token_info)
 
-def ssh():
-    headers = connexion.request.headers['Authorization'].split()[1].strip()
-    #f = open("/tmp/b64.txt", "a")
-    #f.write(headers)
-    #f.write("\n")
-    #f.write("hi\n")
-    #f.close()
-    username = base64.b64decode(str(headers))
-    #f = open("/tmp/b64.txt", "a")
-    #f.write("\n")
-    #f.write(str(username))
-    #f.close()
-    return username.decode("utf-8").strip().split(":")[0]
+def getjwt():
+    try:
+        headers         = connexion.request.headers['Authorization'].split()[1].strip()
+        username        = base64.b64decode(str(headers))
+        username_string = username.decode("utf-8").strip().split(":")[0]
+        jwt_string      = generate_token(username_string)
+        return jwt_string
+    except Exception as e:
+        return "Error: ",e 
 
 def _current_timestamp() -> int:
     return int(time.time())

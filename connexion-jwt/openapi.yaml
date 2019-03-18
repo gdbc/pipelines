@@ -29,10 +29,10 @@ paths:
       - basicAuth: []
 
 
-  /ssh:
+  /getjwt:
     get:
       summary: Return secret string
-      operationId: app.ssh
+      operationId: app.getjwt
       responses:
         '200':
           description: secret response
