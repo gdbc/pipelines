@@ -1,9 +1,7 @@
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 
-
 db = SQLAlchemy()
-
 
 group_env = db.Table('group_env',
     db.Column('group_id', db.Integer, db.ForeignKey('group.group_id')),

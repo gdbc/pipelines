@@ -57,6 +57,36 @@ paths:
       security:
       - jwt: ['secret']
 
+  /createdb:
+    get:
+      summary: Return secret string
+      operationId: app.createdb
+      responses:
+        '200':
+          description: secret response
+          content:
+            'text/plain':
+              schema:
+                type: string
+      security:
+      - jwt: ['secret']
+
+  /readb:
+    get:
+      summary: Return secret string
+      operationId: app.readb
+      responses:
+        '200':
+          description: secret response
+          content:
+            'text/plain':
+              schema:
+                type: string
+      security:
+      - jwt: ['secret']
+
+
+
 
 components:
   securitySchemes:
