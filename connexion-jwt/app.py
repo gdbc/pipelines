@@ -78,16 +78,16 @@ def get_secret(user, token_info) -> str:
 
 def ssh():
     headers = connexion.request.headers['Authorization'].split()[1].strip()
-    f = open("/tmp/b64.txt", "a")
-    f.write(headers)
-    f.write("\n")
-    f.write("hi\n")
-    f.close()
+    #f = open("/tmp/b64.txt", "a")
+    #f.write(headers)
+    #f.write("\n")
+    #f.write("hi\n")
+    #f.close()
     username = base64.b64decode(str(headers))
-    f = open("/tmp/b64.txt", "a")
-    f.write("\n")
-    f.write(str(username))
-    f.close()
+    #f = open("/tmp/b64.txt", "a")
+    #f.write("\n")
+    #f.write(str(username))
+    #f.close()
     return username.decode("utf-8").strip().split(":")[0]
 
 def _current_timestamp() -> int:
