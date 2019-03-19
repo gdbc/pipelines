@@ -4,6 +4,7 @@ Basic example of a resource server
 '''
 
 import six
+import json
 import time
 import base64
 import connexion
@@ -73,10 +74,13 @@ def decode_basic(basic):
 def get_secret(user, token_info) -> str:
     token = connexion.request.headers['Authorization'].split()[1]
     return jwt.decode(token, JWT_SECRET, algorithms=[JWT_ALGORITHM])
-    return '''
-    You are user_id {user} and the secret is 'wbevuec'.
-    Decoded token claims: {token_info}.
-    '''.format(user=user, token_info=token_info)
+
+
+def get_jwt_user(user, token_info) -> str:
+    token = connexion.request.headers['Authorization'].split()[1]
+    #json_user = json.dumps(jwt.decode(token, JWT_SECRET, algorithms=[JWT_ALGORITHM]))
+    json_user = jwt.decode(token, JWT_SECRET, algorithms=[JWT_ALGORITHM])
+    return json_user['sub']
 
 
 def getjwt():

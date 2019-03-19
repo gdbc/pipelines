@@ -57,6 +57,22 @@ paths:
       security:
       - jwt: ['secret']
 
+  /get_jwt_user:
+    get:
+      summary: Return secret string
+      operationId: app.get_jwt_user
+      responses:
+        '200':
+          description: secret response
+          content:
+            'text/plain':
+              schema:
+                type: string
+      security:
+      - jwt: ['secret']
+
+
+
   /createdb:
     get:
       summary: Return secret string
