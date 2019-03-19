@@ -94,23 +94,23 @@ def getjwt():
         return "Error: ",e 
 
 def readb():
-   group_ev = db.session.query(Env).join(group_env).join(Group)
-   group_one_env = group_ev.filter_by(group_name='group_one')
-   f = open("/tmp/groups.txt", "a")
-   for g in group_one_env:
+   user_ev = db.session.query(Env).join(user_env).join(User)
+   user_one_env = user_ev.filter_by(user_name='admin')
+   f = open("/tmp/users.txt", "a")
+   for g in user_one_env:
       f.write(g.env_name + "\n")
    f.close()
    return "hi"
 
 def createdb():
 
-    group1 = Group(group_name='group_one')
-    group2 = Group(group_name='group_two')
-    group3 = Group(group_name='group_three')
+    user1 = User(user_name='admin')
+    user2 = User(user_name='graeme')
+    user3 = User(user_name='test')
 
-    db.session.add(group1)
-    db.session.add(group2)
-    db.session.add(group3)
+    db.session.add(user1)
+    db.session.add(user2)
+    db.session.add(user3)
 
     dev = Env(env_name='d')
     uat = Env(env_name='u')
@@ -120,11 +120,11 @@ def createdb():
     db.session.add(uat)
     db.session.add(prd)
     
-    group1.envs.append(dev)
-    group2.envs.append(dev)
-    group3.envs.append(dev)
-    group1.envs.append(uat)
-    group2.envs.append(prd)
+    user1.envs.append(dev)
+    user2.envs.append(dev)
+    user3.envs.append(dev)
+    user1.envs.append(uat)
+    user2.envs.append(prd)
    
     bu_it = Bu(bu_name='it')
     bu_dt = Bu(bu_name='dt')
@@ -134,22 +134,22 @@ def createdb():
     db.session.add(bu_dt)
     db.session.add(bu_rm)
 
-    group1.bus.append(bu_it)
-    group2.bus.append(bu_it)
-    group3.bus.append(bu_it)
-    group1.bus.append(bu_dt)
-    group2.bus.append(bu_rm)
+    user1.bus.append(bu_it)
+    user2.bus.append(bu_it)
+    user3.bus.append(bu_it)
+    user1.bus.append(bu_dt)
+    user2.bus.append(bu_rm)
 
     app_ora = App(app_name='ora')
     app_cii = App(app_name='cii')
     app_jen = App(app_name='jen')
 
-    group1.apptype.append(app_ora)
-    group2.apptype.append(app_ora)
-    group3.apptype.append(app_cii)
-    group1.apptype.append(app_cii)
-    group1.apptype.append(app_jen)
-    group2.apptype.append(app_jen)
+    user1.apptype.append(app_ora)
+    user2.apptype.append(app_ora)
+    user3.apptype.append(app_cii)
+    user1.apptype.append(app_cii)
+    user1.apptype.append(app_jen)
+    user2.apptype.append(app_jen)
 
     db.session.commit()
     db.session.flush()
