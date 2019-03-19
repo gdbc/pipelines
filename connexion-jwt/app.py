@@ -94,13 +94,16 @@ def getjwt():
         return "Error: ",e 
 
 def readb():
+   envs = []
    user_ev = db.session.query(Env).join(user_env).join(User)
    user_one_env = user_ev.filter_by(user_name='admin')
    f = open("/tmp/users.txt", "a")
    for g in user_one_env:
+      envs.append(g.env_name)
       f.write(g.env_name + "\n")
    f.close()
-   return "hi"
+   env_list = ",".join(envs)
+   return env_list
 
 def createdb():
 
