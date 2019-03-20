@@ -87,13 +87,21 @@ paths:
       security:
       - jwt: ['secret']
 
-  /readb:
+  /get_user_envs/{user_id}:
     get:
       summary: Return secret string
-      operationId: app.readb
+      operationId: app.get_user_envs
+      parameters:
+        - name: user_id
+          description: User unique identifier
+          in: path
+          required: true
+          example: adm_broogra
+          schema:
+            type: string
       responses:
         '200':
-          description: secret response
+          description: list of environments
           content:
             'text/plain':
               schema:

@@ -93,10 +93,10 @@ def getjwt():
     except Exception as e:
         return "Error: ",e 
 
-def readb():
+def get_user_envs(user_id):
    envs = []
    user_ev = db.session.query(Env).join(user_env).join(User)
-   user_one_env = user_ev.filter_by(user_name='admin')
+   user_one_env = user_ev.filter_by(user_name=user_id)
    f = open("/tmp/users.txt", "a")
    for g in user_one_env:
       envs.append(g.env_name)
