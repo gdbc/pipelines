@@ -105,6 +105,15 @@ def get_user_envs(user_id):
    env_list = ",".join(envs)
    return env_list
 
+def get_user_bus(user_id):
+   bus = []
+   ubu = db.session.query(Bu).join(user_bu).join(User)
+   user_one_bu = ubu.filter_by(user_name=user_id)
+   for bu in user_one_bu:
+      bus.append(bu.bu_name)
+   bu_list = ",".join(bus)
+   return bu_list
+
 def createdb():
 
     user1 = User(user_name='admin')

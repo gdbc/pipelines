@@ -110,6 +110,30 @@ paths:
       - jwt: ['secret']
 
 
+  /get_user_bus/{user_id}:
+    get:
+      summary: Return secret string
+      operationId: app.get_user_bus
+      parameters:
+        - name: user_id
+          description: User unique identifier
+          in: path
+          required: true
+          example: adm_broogra
+          schema:
+            type: string
+      responses:
+        '200':
+          description: list of environments
+          content:
+            'text/plain':
+              schema:
+                type: string
+      security:
+      - jwt: ['secret']
+
+
+
 
 
 components:
