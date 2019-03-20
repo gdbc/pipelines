@@ -114,6 +114,15 @@ def get_user_bus(user_id):
    bu_list = ",".join(bus)
    return bu_list
 
+def get_user_app(user_id):
+   apps = []
+   appt = db.session.query(App).join(user_app).join(User)
+   user_one_app = appt.filter_by(user_name=user_id)
+   for app in user_one_app:
+      apps.append(app.app_name)
+   app_list = ",".join(apps)
+   return app_list
+
 def createdb():
 
     user1 = User(user_name='admin')
