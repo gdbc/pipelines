@@ -172,6 +172,39 @@ def createdb():
     user1.apptype.append(app_jen)
     user2.apptype.append(app_jen)
 
+    host1  = Host(host_name='dnv-it-lapp0001')
+    host2  = Host(host_name='unv-it-lapp0001')
+    host3  = Host(host_name='qnv-it-lapp0001')
+    host4  = Host(host_name='pnv-it-lapp0001')
+    host5  = Host(host_name='pnv-it-lora0001')
+    host6  = Host(host_name='unv-it-lora0001')
+    host7  = Host(host_name='dnv-it-lora0001')
+    host8  = Host(host_name='pnv-rm-lapp0001')
+    host9  = Host(host_name='dnv-rm-lapp0001')
+    host10 = Host(host_name='unv-rm-lapp0001')
+    host11 = Host(host_name='unv-rm-lora0001')
+    host12 = Host(host_name='pnv-rm-lora0001')
+
+    user1.host.append(host1)
+    user1.host.append(host2)
+    user1.host.append(host3)
+    user1.host.append(host5)
+    user1.host.append(host6)
+    user1.host.append(host7)
+    user1.host.append(host11)
+    user1.host.append(host12)
+
+    user2.host.append(host1)
+    user2.host.append(host7)
+
+    user3.host.append(host2)
+    user3.host.append(host6)
+    user3.host.append(host10)
+    user3.host.append(host11)
+
+   
+
+
     db.session.commit()
     db.session.flush()
     
