@@ -154,6 +154,29 @@ paths:
       security:
       - jwt: ['secret']
 
+  /get_user_hosts/{user_id}:
+    get:
+      summary: Return secret string
+      operationId: app.get_user_hosts
+      parameters:
+        - name: user_id
+          description: User unique identifier
+          in: path
+          required: true
+          example: adm_broogra
+          schema:
+            type: string
+      responses:
+        '200':
+          description: list of environments
+          content:
+            'text/plain':
+              schema:
+                type: string
+      security:
+      - jwt: ['secret']
+
+
 
 
 

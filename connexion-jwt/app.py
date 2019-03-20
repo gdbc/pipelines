@@ -105,6 +105,7 @@ def get_user_envs(user_id):
    env_list = ",".join(envs)
    return env_list
 
+
 def get_user_bus(user_id):
    bus = []
    ubu = db.session.query(Bu).join(user_bu).join(User)
@@ -114,6 +115,7 @@ def get_user_bus(user_id):
    bu_list = ",".join(bus)
    return bu_list
 
+
 def get_user_app(user_id):
    apps = []
    appt = db.session.query(App).join(user_app).join(User)
@@ -122,6 +124,17 @@ def get_user_app(user_id):
       apps.append(app.app_name)
    app_list = ",".join(apps)
    return app_list
+
+
+def get_user_hosts(user_id):
+   hosts = []
+   u_hosts = db.session.query(Host).join(user_host).join(User)
+   user_one_hosts = u_hosts.filter_by(user_name=user_id)
+   for host in user_one_hosts:
+      hosts.append(host.host_name)
+   host_list = ",".join(hosts)
+   return host_list
+
 
 def createdb():
 
