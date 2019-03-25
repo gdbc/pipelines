@@ -206,7 +206,7 @@ def user_apps(user_id):
    appt = db.session.query(App).join(user_app).join(User)
    user_one_app = appt.filter_by(user_name=user_id)
    app_l = [a.app_name for a in user_one_app]
-   return app_list
+   return app_l
 
 
 #RBAC
