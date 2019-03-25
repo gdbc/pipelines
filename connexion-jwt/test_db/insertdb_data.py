@@ -272,6 +272,34 @@ def user_apptype_role(user_id, fqdn):
        print("Failed, error: %s" %(e))
 
 
+def_check_auth(user_id, fqdn):
+    try: 
+        user_has_access = False
+        if user_exists(user_id):
+            if fqdn_exists(user_id, fqdn):
+                print("fqdn: %s exists for user: %s" %(fqdn, user_id))
+                user_has_access = True
+            elif user_env_role(user_id,fqdn):
+                print("env exists for fqdn: %s and user: %s" %(fqdn, user_id))
+                user_has_access = True
+            elif user_bu_role(user_id, fqdn):
+                print("bu exists for fqdn: %s and user: %s" %(fqdn, user_id))
+                user_has_access = True
+            elif user_apptype_role(user_id, fqdn):
+                print("apptype exists for fqdn: %s and user: %s" %(fqdn, user_id))
+                user_has_access = True
+            else:
+                print("user: %s does not have the correct authorization to edit fqdn: %s" %(user_id, fqdn))
+                user_has_access = False
+                
+        else:
+            user_has_access = False
+        return user_has_access
+   except Exception as e:
+       print("Failed, error: %s" %(e))
+
+
+
 def get_servertype(alphanum):
 
     an     = alphanum
