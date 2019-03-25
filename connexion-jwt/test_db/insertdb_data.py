@@ -163,7 +163,6 @@ def user_exists(user_id):
        user = db.session.query(User)
        user_one_user = user.filter_by(user_name=user_id)
        u = [userx.user_name for userx in user_one_user]
-       print(u)
        if user_id in u:
            return True
        else:
