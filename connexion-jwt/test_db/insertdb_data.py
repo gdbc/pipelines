@@ -295,7 +295,7 @@ def check_auth(user_id, fqdn):
         else:
             user_has_access = False
         return user_has_access
-   except Exception as e:
+    except Exception as e:
        print("Failed, error: %s" %(e))
 
 
