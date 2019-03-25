@@ -341,3 +341,11 @@ def name_to_path(servername):
 
 # Example 
 # x,y,z = name_to_path('dnv-it-lapp0001')
+
+# update objects ie adding bu's, envs, hosts etc
+# Update BU
+#admin = User.query.filter_by(user_name='admin').first()
+#bu = Bu.query.filter_by(bu_name='rm').first()
+#admin.bus.append(bu)
+#db.session.commit()
+#db.session.flush()
