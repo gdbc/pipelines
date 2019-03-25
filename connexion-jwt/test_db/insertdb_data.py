@@ -216,7 +216,7 @@ def user_env_role(user_id, fqdn):
        env,bu,stype = name_to_path(fqdn)
        user_env_list = user_envs(user_id)
        ub = user_bus(user_id)
-       ua = user_app(user_id)
+       ua = user_apps(user_id)
        if env in user_env_list:
            if not ub and not ua:
              return True
@@ -237,7 +237,7 @@ def user_bu_role(user_id, fqdn):
        env,bu,stype = name_to_path(fqdn)
        user_bu_list = user_bus(user_id)
        ue = user_envs(user_id)
-       ua = user_app(user_id)
+       ua = user_apps(user_id)
        if bu in user_bu_list: 
            if not ue and not ua:
                return True
