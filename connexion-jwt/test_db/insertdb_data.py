@@ -272,7 +272,7 @@ def user_apptype_role(user_id, fqdn):
        print("Failed, error: %s" %(e))
 
 
-def_check_auth(user_id, fqdn):
+def check_auth(user_id, fqdn):
     try: 
         user_has_access = False
         if user_exists(user_id):
