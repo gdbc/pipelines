@@ -218,10 +218,13 @@ def user_env_role(user_id, fqdn):
        ua = user_apps(user_id)
        if env in user_env_list:
            if not ub and not ua:
+             print("user_bus and user_apps empty for user %s" %(user_id))
              return True
            elif bu in ub and stype not in ua: 
+             print("bu: %s exists in user_bus and user_apps empty for user %s" %(bu, user_id))
              return True
            elif bu in ub and stype in ua:
+             print("bu: %s exists in user_bus and stype: %s exists in user_apps for user %s" %(bu, stype, user_id))
              return True
            #else:
            #  return False
@@ -239,10 +242,13 @@ def user_bu_role(user_id, fqdn):
        ua = user_apps(user_id)
        if bu in user_bu_list: 
            if not ue and not ua:
+               print("user_envs and user_apps empty for user %s" %(user_id))
                return True
            elif env in ue and stype not in ua:
+               print("env: %s exists in user_envs and user_apps empty for user %s" %(env, user_id))
                return True
            elif env in ue and stype in ua:
+               print("env: %s exists in user_envs and stype: %s exists in user_apps for user %s" %(env, stype, user_id))
                return True
            #else:
            #    return False
@@ -260,10 +266,13 @@ def user_apptype_role(user_id, fqdn):
        ue = user_envs(user_id)
        if env in user_apptype_list:
            if not ub and not ue:
+               print("user_bus and user_env empty for user %s" %(user_id))
                return True
            elif env in ue and bu not in ub: 
+               print("env: %s exists in user_envs and user_bus empty for user %s" %(env, user_id))
                return True
            elif env in ue and bu in ub:
+               print("env: %s exists in user_envs and bu: %s exists in user_bus for user %s" %(env, bu, user_id))
                return True
        else: 
            return False
