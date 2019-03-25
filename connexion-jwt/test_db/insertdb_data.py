@@ -287,13 +287,13 @@ def check_auth(user_id, fqdn):
             if fqdn_exists(user_id, fqdn):
                 print("fqdn: %s exists for user: %s" %(fqdn, user_id))
                 user_has_access = True
-            elif user_env_role(user_id,fqdn):
+            elif user_env_role(user_id,fqdn) and user_has_access = False:
                 print("env exists for fqdn: %s and user: %s" %(fqdn, user_id))
                 user_has_access = True
-            elif user_bu_role(user_id, fqdn):
+            elif user_bu_role(user_id, fqdn) and user_has_access = False:
                 print("bu exists for fqdn: %s and user: %s" %(fqdn, user_id))
                 user_has_access = True
-            elif user_apptype_role(user_id, fqdn):
+            elif user_apptype_role(user_id, fqdn) and user_has_access = False:
                 print("apptype exists for fqdn: %s and user: %s" %(fqdn, user_id))
                 user_has_access = True
             else:
