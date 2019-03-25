@@ -202,7 +202,7 @@ def user_bus(user_id):
    return bu_l
 
 
-def user_app(user_id):
+def user_apps(user_id):
    appt = db.session.query(App).join(user_app).join(User)
    user_one_app = appt.filter_by(user_name=user_id)
    app_l = [a.app_name for a in user_one_app]
@@ -220,15 +220,56 @@ def user_env_role(user_id, fqdn):
        if env in user_env_list:
            if not ub and not ua:
              return True
+           elif bu in ub and stype not in ua: 
+             return True
+           elif bu in ub and stype in ua:
+             return True
+           #else:
+           #  return False
        else:
            return False
    except Exception as e:
        print("Failed, error: %s" %(e))
      
 
-#def user_bu_role(user_id, fqdn)
+def user_bu_role(user_id, fqdn):
+   try: 
+       env,bu,stype = name_to_path(fqdn)
+       user_bu_list = user_bus(user_id)
+       ue = user_envs(user_id)
+       ua = user_app(user_id)
+       if bu in user_bu_list: 
+           if not ue and not ua:
+               return True
+           elif env in ue and stype not in ua:
+               return True
+           elif env in ue and stype in ua:
+               return True
+           #else:
+           #    return False
+       else:
+           return False
 
-#def user_apptype_role(user_id,fqdn)
+   except Exception as e:
+       print("Failed, error: %s" %(e))
+
+def user_apptype_role(user_id, fqdn):
+   try:
+       env,bu,stype = name_to_path(fqdn)
+       user_apptype_list = user_apps(user_id)
+       ub = user_bus(user_id)
+       ue = user_envs(user_id)
+       if env in user_apptype_list:
+           if not ub and not ue:
+               return True
+           elif env in ue and bu not in ub: 
+               return True
+           elif env in ue and bu in ub:
+               return True
+       else: 
+           return False
+   except Exception as e:
+       print("Failed, error: %s" %(e))
 
 
 def get_servertype(alphanum):
