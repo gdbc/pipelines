@@ -106,6 +106,17 @@ def get_user_envs(user_id):
    return env_list
 
 
+def user_exists(user_id):
+   users = []
+   user = db.session.query(User)
+   user_one_user = user.filter_by(user_name=user_id)
+   u = [userx.user_name for userx in user_one_user]
+   if user_id in u:
+       return True
+   else: 
+       return False
+
+
 def get_user_bus(user_id):
    bus = []
    ubu = db.session.query(Bu).join(user_bu).join(User)
@@ -174,9 +185,9 @@ def createdb():
     user1.bus.append(bu_dt)
     user2.bus.append(bu_rm)
 
-    app_ora = App(app_name='ora')
-    app_cii = App(app_name='cii')
-    app_jen = App(app_name='jen')
+    app_ora = App(app_name='lora')
+    app_cii = App(app_name='lcii')
+    app_jen = App(app_name='ljen')
 
     user1.apptype.append(app_ora)
     user2.apptype.append(app_ora)
