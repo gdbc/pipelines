@@ -239,6 +239,22 @@ def get_user_hosts(user_id):
    host_list = ",".join(hosts)
    return host_list
 
+def get_envs():
+    env_list = []
+    envs = db.session.query(Env).order_by(Env.env_name)
+    for e in envs:
+        env_list.append(e.env_name)
+    env_list_return = ",".join(env_list)
+    return env_list_return
+
+def add_env(env_id):
+    try:
+        envs = Env(env_name=env_id)
+        db.session.add(envs)
+        db.session.commit()
+        return "done"
+    except Exception as e:
+        return "Error: ",e
 
 def createdb():
 

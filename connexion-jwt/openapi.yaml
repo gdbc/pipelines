@@ -72,6 +72,21 @@ paths:
       - jwt: ['secret']
 
 
+  /get_envs:
+    get:
+      summary: Return list of environments
+      operationId: app.get_envs
+      responses:
+        '200':
+          description: Return list of environments
+          content:
+            'text/plain':
+              schema:
+                type: string
+      security:
+      - jwt: ['secret']
+
+
 
   /createdb:
     get:
@@ -80,6 +95,28 @@ paths:
       responses:
         '200':
           description: secret response
+          content:
+            'text/plain':
+              schema:
+                type: string
+      security:
+      - jwt: ['secret']
+
+  /add_env/{env_id}:
+    get:
+      summary: Add an environment
+      operationId: app.add_env
+      parameters:
+        - name: env_id
+          description: User unique identifier
+          in: path
+          required: true
+          example: d
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Add an environment
           content:
             'text/plain':
               schema:
