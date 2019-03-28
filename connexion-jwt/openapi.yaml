@@ -87,6 +87,7 @@ paths:
       security:
       - jwt: ['secret']
 
+
   /get_user_envs/{user_id}:
     get:
       summary: Return secret string
@@ -170,6 +171,64 @@ paths:
       - jwt: ['secret']
 
 
+  /add_user_bus/{user_id}/{bu_id}:
+    get:
+      summary: Add user BU
+      operationId: app.add_user_bus
+      parameters:
+        - name: user_id
+          description: User unique identifier
+          in: path
+          required: true
+          example: adm_broogra
+          schema:
+            type: string
+        - name: bu_id
+          description: environment
+          in: path
+          required: true
+          example: it
+          schema:
+            type: string
+      responses:
+        '200':
+          description: delete a user bu
+          content:
+            'text/plain':
+              schema:
+                type: string
+      security:
+      - jwt: ['secret']
+
+  /del_user_bus/{user_id}/{bu_id}:
+    get:
+      summary: Remove user BU
+      operationId: app.del_user_bus
+      parameters:
+        - name: user_id
+          description: User unique identifier
+          in: path
+          required: true
+          example: adm_broogra
+          schema:
+            type: string
+        - name: bu_id
+          description: environment
+          in: path
+          required: true
+          example: it
+          schema:
+            type: string
+      responses:
+        '200':
+          description: delete a user bu
+          content:
+            'text/plain':
+              schema:
+                type: string
+      security:
+      - jwt: ['secret']
+
 
   /get_user_bus/{user_id}:
     get:
@@ -193,6 +252,7 @@ paths:
       security:
       - jwt: ['secret']
 
+
   /get_user_app/{user_id}:
     get:
       summary: Return secret string
@@ -215,6 +275,66 @@ paths:
       security:
       - jwt: ['secret']
 
+  /add_user_app/{user_id}/{app_id}:
+    get:
+      summary: Add user apps type
+      operationId: app.add_user_app
+      parameters:
+        - name: user_id
+          description: User unique identifier
+          in: path
+          required: true
+          example: adm_broogra
+          schema:
+            type: string
+        - name: app_id
+          description: app type
+          in: path
+          required: true
+          example: lora
+          schema:
+            type: string
+      responses:
+        '200':
+          description: add a user app type
+          content:
+            'text/plain':
+              schema:
+                type: string
+      security:
+      - jwt: ['secret']
+
+
+  /del_user_app/{user_id}/{app_id}:
+    get:
+      summary: Remove user apps type
+      operationId: app.del_user_app
+      parameters:
+        - name: user_id
+          description: User unique identifier
+          in: path
+          required: true
+          example: adm_broogra
+          schema:
+            type: string
+        - name: app_id
+          description: app type
+          in: path
+          required: true
+          example: lora
+          schema:
+            type: string
+      responses:
+        '200':
+          description: delete a user app type
+          content:
+            'text/plain':
+              schema:
+                type: string
+      security:
+      - jwt: ['secret']
+
+
   /get_user_hosts/{user_id}:
     get:
       summary: Return secret string
@@ -229,7 +349,7 @@ paths:
             type: string
       responses:
         '200':
-          description: list of environments
+          description: list of hosts user can edit
           content:
             'text/plain':
               schema:
@@ -237,8 +357,63 @@ paths:
       security:
       - jwt: ['secret']
 
+  /del_user_host/{user_id}/{host_id}:
+    get:
+      summary: Remove user host
+      operationId: app.del_user_host
+      parameters:
+        - name: user_id
+          description: User unique identifier
+          in: path
+          required: true
+          example: adm_broogra
+          schema:
+            type: string
+        - name: host_id
+          description: host 
+          in: path
+          required: true
+          example: pnv-it-lrep0001
+          schema:
+            type: string
+      responses:
+        '200':
+          description: delete a user host
+          content:
+            'text/plain':
+              schema:
+                type: string
+      security:
+      - jwt: ['secret']
 
-
+  /add_user_host/{user_id}/{host_id}:
+    get:
+      summary: Add user host
+      operationId: app.add_user_host
+      parameters:
+        - name: user_id
+          description: User unique identifier
+          in: path
+          required: true
+          example: adm_broogra
+          schema:
+            type: string
+        - name: host_id
+          description: host
+          in: path
+          required: true
+          example: pnv-it-lrep0001
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Add a user host
+          content:
+            'text/plain':
+              schema:
+                type: string
+      security:
+      - jwt: ['secret']
 
 
 components:

@@ -129,6 +129,75 @@ def del_user_envs(user_id, env_id):
         return "Error: ",e
 
 
+def add_user_bus(user_id, bu_id):
+    try:
+        user = User.query.filter_by(user_name=user_id).first()
+        bu = Bu.query.filter_by(bu_name=bu_id).first()
+        user.bus.append(bu)
+        db.session.commit()
+        db.session.flush() 
+        return "done"
+    except Exception as e:
+        return "Error: ",e
+
+def del_user_bus(user_id, bu_id):
+    try:
+        user = User.query.filter_by(user_name=user_id).first()
+        bu = Bu.query.filter_by(bu_name=bu_id).first()
+        user.bus.remove(bu)
+        db.session.commit()
+        db.session.flush()
+        return "done"
+    except Exception as e:
+        return "Error: ",e
+
+def add_user_app(user_id, app_id):
+    try:
+        user = User.query.filter_by(user_name=user_id).first()
+        apps = App.query.filter_by(app_name=app_id).first()
+        user.apptype.append(apps)
+        db.session.commit()
+        db.session.flush()
+        return "done"
+    except Exception as e:
+        return "Error: ",e
+
+
+def del_user_app(user_id, app_id):
+    try:
+        user = User.query.filter_by(user_name=user_id).first()
+        apps = App.query.filter_by(app_name=app_id).first()
+        user.apptype.remove(apps)
+        db.session.commit()
+        db.session.flush()
+        return "done"
+    except Exception as e:
+        return "Error: ",e
+
+def add_user_host(user_id, host_id):
+    try:
+        user = User.query.filter_by(user_name=user_id).first()
+        host = Host.query.filter_by(host_name=host_id).first()
+        user.host.append(host)
+        db.session.commit()
+        db.session.flush()
+        return "done"
+    except Exception as e:
+        return "Error: ",e
+
+
+def del_user_host(user_id, host_id):
+    try:
+        user = User.query.filter_by(user_name=user_id).first()
+        host = Host.query.filter_by(host_name=host_id).first()
+        user.host.remove(host)
+        db.session.commit()
+        db.session.flush()
+        return "done"
+    except Exception as e:
+        return "Error: ",e
+
+
 
 def user_exists(user_id):
    users = []
@@ -249,9 +318,6 @@ def createdb():
     user3.host.append(host6)
     user3.host.append(host10)
     user3.host.append(host11)
-
-   
-
 
     db.session.commit()
     db.session.flush()
