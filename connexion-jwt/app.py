@@ -105,6 +105,30 @@ def get_user_envs(user_id):
    env_list = ",".join(envs)
    return env_list
 
+def add_user_envs(user_id, env_id): 
+    try:
+        user = User.query.filter_by(user_name=user_id).first()
+        env = Env.query.filter_by(env_name=env_id).first()
+        user.envs.append(env)
+        db.session.commit()
+        db.session.flush()
+        return "done"
+    except Exception as e:
+        return "Error: ",e
+
+
+def del_user_envs(user_id, env_id):
+    try:
+        user = User.query.filter_by(user_name=user_id).first()
+        env = Env.query.filter_by(env_name=env_id).first()
+        user.envs.remove(env)
+        db.session.commit()
+        db.session.flush()
+        return "done"
+    except Exception as e:
+        return "Error: ",e
+
+
 
 def user_exists(user_id):
    users = []

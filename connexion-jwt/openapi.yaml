@@ -110,6 +110,67 @@ paths:
       - jwt: ['secret']
 
 
+  /add_user_envs/{user_id}/{env_id}:
+    get:
+      summary: Add user environment
+      operationId: app.add_user_envs
+      parameters:
+        - name: user_id
+          description: User unique identifier
+          in: path
+          required: true
+          example: adm_broogra
+          schema:
+            type: string
+        - name: env_id
+          description: environment 
+          in: path
+          required: true
+          example: p
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Add a user environment
+          content:
+            'text/plain':
+              schema:
+                type: string
+      security:
+      - jwt: ['secret']
+
+
+  /del_user_envs/{user_id}/{env_id}:
+    get:
+      summary: Delete user environment
+      operationId: app.del_user_envs
+      parameters:
+        - name: user_id
+          description: User unique identifier
+          in: path
+          required: true
+          example: adm_broogra
+          schema:
+            type: string
+        - name: env_id
+          description: environment
+          in: path
+          required: true
+          example: p
+          schema:
+            type: string
+      responses:
+        '200':
+          description: delete a user environment
+          content:
+            'text/plain':
+              schema:
+                type: string
+      security:
+      - jwt: ['secret']
+
+
+
   /get_user_bus/{user_id}:
     get:
       summary: Return secret string
