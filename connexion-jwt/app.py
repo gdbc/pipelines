@@ -310,8 +310,7 @@ def add_hosts(host_id):
 
 def del_env(env_id):
     try:
-        env = Env.query.filter_by(env_name=env_id).first()
-        db.session.remove(env)
+        env = Env.query.filter_by(env_name=env_id).delete()
         db.session.commit()
         return "done"
     except Exception as e:
@@ -319,8 +318,7 @@ def del_env(env_id):
 
 def del_host(host_id):
     try:
-        host = Host.query.filter_by(host_name=host_id).first()
-        db.session.remove(host)
+        host = Host.query.filter_by(host_name=host_id).delete()
         db.session.commit()
         return "done"
     except Exception as e:
@@ -328,8 +326,7 @@ def del_host(host_id):
 
 def del_app(app_id):
     try:
-        app = App.query.filter_by(app_name=app_id).first()
-        db.session.remove(app)
+        app = App.query.filter_by(app_name=app_id).delete()
         db.session.commit()
         return "done"
     except Exception as e:
@@ -337,8 +334,7 @@ def del_app(app_id):
 
 def del_bu(bu_id):
     try:
-        bu = Bu.query.filter_by(bu_name=bu_id).first()
-        db.session.remove(bu)
+        bu = Bu.query.filter_by(bu_name=bu_id).delete()
         db.session.commit()
         return "done"
     except Exception as e:
