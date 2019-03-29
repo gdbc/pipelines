@@ -256,6 +256,60 @@ def add_env(env_id):
     except Exception as e:
         return "Error: ",e
 
+def get_bus():
+    bus_list = []
+    bus = db.session.query(Bu).order_by(Bu.bu_name)
+    for b in bus:
+        bus_list.append(b.bu_name)
+    bus_list_return = ",".join(bus_list)
+    return bus_list_return
+
+def add_bus(bu_id):
+    try:
+        bus = Bu(bu_name=bu_id)
+        db.session.add(bus)
+        db.session.commit()
+        return "done"
+    except Exception as e:
+        return "Error: ",e
+
+def get_apps():
+    apps_list = []
+    apps = db.session.query(App).order_by(App.app_name)
+    for a in apps:
+        apps_list.append(a.app_name)
+    apps_list_return = ",".join(apps_list)
+    return apps_list_return
+
+def add_apps(app_id):
+    try:
+        apps = App(app_name=app_id)
+        db.session.add(apps)
+        db.session.commit()
+        return "done"
+    except Exception as e:
+        return "Error: ",e
+
+
+def get_hosts():
+    hosts_list = []
+    hosts = db.session.query(Host).order_by(Host.host_name)
+    for h in hosts:
+        hosts_list.append(h.host_name)
+    hosts_list_return = ",".join(hosts_list)
+    return hosts_list_return
+
+def add_hosts(host_id):
+    try:
+        hosts = Host(host_name=host_id)
+        db.session.add(hosts)
+        db.session.commit()
+        return "done"
+    except Exception as e:
+        return "Error: ",e
+
+
+
 def createdb():
 
     user1 = User(user_name='admin')
