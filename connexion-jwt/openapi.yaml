@@ -563,6 +563,98 @@ paths:
       - jwt: ['secret']
 
 
+  /del_bu/{bu_id}:
+    get:
+      summary: Remove BU
+      operationId: app.del_bu
+      parameters:
+        - name: bu_id
+          description: environment
+          in: path
+          required: true
+          example: it
+          schema:
+            type: string
+      responses:
+        '200':
+          description: delete a bu
+          content:
+            'text/plain':
+              schema:
+                type: string
+      security:
+      - jwt: ['secret']
+
+
+  /del_env/{env_id}:
+    get:
+      summary: Remove and environment
+      operationId: app.del_env
+      parameters:
+        - name: env_id
+          description: environment
+          in: path
+          required: true
+          example: d
+          schema:
+            type: string
+      responses:
+        '200':
+          description: delete an environment
+          content:
+            'text/plain':
+              schema:
+                type: string
+      security:
+      - jwt: ['secret']
+
+  /del_app/{app_id}:
+    get:
+      summary: Remove app type
+      operationId: app.del_app
+      parameters:
+        - name: app_id
+          description: Remove and application ID 
+          in: path
+          required: true
+          example: lora
+          schema:
+            type: string
+      responses:
+        '200':
+          description: delete an app type
+          content:
+            'text/plain':
+              schema:
+                type: string
+      security:
+      - jwt: ['secret']
+
+  /del_host/{host_id}:
+    get:
+      summary: Remove host
+      operationId: app.del_host
+      parameters:
+        - name: host_id
+          description: remove a host
+          in: path
+          required: true
+          example: pn4-it-lora001
+          schema:
+            type: string
+      responses:
+        '200':
+          description: delete a host
+          content:
+            'text/plain':
+              schema:
+                type: string
+      security:
+      - jwt: ['secret']
+
+
+
+
 components:
   securitySchemes:
     oauth2:

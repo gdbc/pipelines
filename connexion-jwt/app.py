@@ -308,6 +308,41 @@ def add_hosts(host_id):
     except Exception as e:
         return "Error: ",e
 
+def del_env(env_id):
+    try:
+        env = Env.query.filter_by(env_name=env_id).first()
+        db.session.remove(env)
+        db.session.commit()
+        return "done"
+    except Exception as e:
+        return "Error: ",e
+
+def del_host(host_id):
+    try:
+        host = Host.query.filter_by(host_name=host_id).first()
+        db.session.remove(host)
+        db.session.commit()
+        return "done"
+    except Exception as e:
+        return "Error: ",e
+
+def del_app(app_id):
+    try:
+        app = App.query.filter_by(app_name=app_id).first()
+        db.session.remove(app)
+        db.session.commit()
+        return "done"
+    except Exception as e:
+        return "Error: ",e
+
+def del_bu(bu_id):
+    try:
+        bu = Bu.query.filter_by(bu_name=bu_id).first()
+        db.session.remove(bu)
+        db.session.commit()
+        return "done"
+    except Exception as e:
+        return "Error: ",e
 
 
 def createdb():
