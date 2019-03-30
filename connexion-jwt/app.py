@@ -112,6 +112,7 @@ def add_user_envs(user_id, env_id):
         env = Env.query.filter_by(env_name=env_id).first()
         user.envs.append(env)
         db.session.commit()
+        db.session.flush()
         return "done"
     except Exception as e:
         return "Error: ",e
@@ -413,7 +414,7 @@ def createdb():
     user3.host.append(host11)
 
     db.session.commit()
-    #db.session.flush()
+    db.session.flush()
     
     return "done"
  

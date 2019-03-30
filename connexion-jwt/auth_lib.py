@@ -108,7 +108,7 @@ def user_apptype_role(user_id, fqdn):
        user_apptype_list = user_apps(user_id)
        ub = user_bus(user_id)
        ue = user_envs(user_id)
-       if env in user_apptype_list:
+       if stype in user_apptype_list:
            if not ub and not ue:
                print("user_bus and user_env empty for user %s" %(user_id))
                return True
