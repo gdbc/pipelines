@@ -7,6 +7,7 @@ import six
 import json
 import time
 import base64
+import auth_lib
 import connexion
 from auth_db2 import db
 from auth_db2 import *
@@ -111,7 +112,6 @@ def add_user_envs(user_id, env_id):
         env = Env.query.filter_by(env_name=env_id).first()
         user.envs.append(env)
         db.session.commit()
-        #db.session.flush()
         return "done"
     except Exception as e:
         return "Error: ",e
@@ -123,7 +123,6 @@ def del_user_envs(user_id, env_id):
         env = Env.query.filter_by(env_name=env_id).first()
         user.envs.remove(env)
         db.session.commit()
-        #db.session.flush()
         return "done"
     except Exception as e:
         return "Error: ",e
@@ -135,7 +134,6 @@ def add_user_bus(user_id, bu_id):
         bu = Bu.query.filter_by(bu_name=bu_id).first()
         user.bus.append(bu)
         db.session.commit()
-        #db.session.flush() 
         return "done"
     except Exception as e:
         return "Error: ",e
@@ -146,7 +144,6 @@ def del_user_bus(user_id, bu_id):
         bu = Bu.query.filter_by(bu_name=bu_id).first()
         user.bus.remove(bu)
         db.session.commit()
-        #db.session.flush()
         return "done"
     except Exception as e:
         return "Error: ",e
@@ -157,7 +154,6 @@ def add_user_app(user_id, app_id):
         apps = App.query.filter_by(app_name=app_id).first()
         user.apptype.append(apps)
         db.session.commit()
-        #db.session.flush()
         return "done"
     except Exception as e:
         return "Error: ",e
@@ -169,7 +165,6 @@ def del_user_app(user_id, app_id):
         apps = App.query.filter_by(app_name=app_id).first()
         user.apptype.remove(apps)
         db.session.commit()
-        #db.session.flush()
         return "done"
     except Exception as e:
         return "Error: ",e
@@ -180,7 +175,6 @@ def add_user_host(user_id, host_id):
         host = Host.query.filter_by(host_name=host_id).first()
         user.host.append(host)
         db.session.commit()
-        #db.session.flush()
         return "done"
     except Exception as e:
         return "Error: ",e
@@ -192,7 +186,6 @@ def del_user_host(user_id, host_id):
         host = Host.query.filter_by(host_name=host_id).first()
         user.host.remove(host)
         db.session.commit()
-        #db.session.flush()
         return "done"
     except Exception as e:
         return "Error: ",e

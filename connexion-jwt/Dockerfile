@@ -16,6 +16,7 @@ RUN pip3 install connexion flask_sqlalchemy
 RUN pip3 install connexion[swagger-ui]
 
 COPY app.py $FLASK_HOME
+COPY auth_lib.py $FLASK_HOME
 COPY openapi.yaml $FLASK_HOME
 COPY auth_db2.py $FLASK_HOME
 

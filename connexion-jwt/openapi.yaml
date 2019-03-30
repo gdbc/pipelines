@@ -563,6 +563,36 @@ paths:
       - jwt: ['secret']
 
 
+  /check_auth/{user_id}/{fqdn}:
+    get:
+      summary: Check authorisation 
+      operationId: auth_lib.check_auth
+      parameters:
+        - name: user_id
+          description: User unique identifier
+          in: path
+          required: true
+          example: adm_broogra
+          schema:
+            type: string
+        - name: fqdn
+          description: hostname
+          in: path
+          required: true
+          example: pnv-it-lrep0001
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Add a user host
+          content:
+            'text/plain':
+              schema:
+                type: string
+      security:
+      - jwt: ['secret']
+
+
   /del_bu/{bu_id}:
     get:
       summary: Remove BU
