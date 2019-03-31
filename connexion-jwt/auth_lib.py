@@ -112,11 +112,11 @@ def user_apptype_role(user_id, fqdn):
            if not ub and not ue:
                print("user_bus and user_env empty for user %s" %(user_id))
                return True
-           elif env in ue and bu not in ub: 
-               print("env: %s exists in user_envs and user_bus empty for user %s" %(env, user_id))
-               return True
+           #elif env in ue and bu not in ub: 
+               #print("apptype: %s exists in user_envs and user_bus empty for user %s" %(env, user_id))
+               #return True
            elif env in ue and bu in ub:
-               print("env: %s exists in user_envs and bu: %s exists in user_bus for user %s" %(env, bu, user_id))
+               print("apptype: %s exists in user_envs and bu: %s exists in user_bus for user %s" %(env, bu, user_id))
                return True
        else: 
            return False
