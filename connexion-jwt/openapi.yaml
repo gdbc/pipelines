@@ -75,7 +75,7 @@ paths:
   /get_envs:
     get:
       summary: Return list of environments
-      operationId: app.get_envs
+      operationId: db_auth_functions.get_envs
       responses:
         '200':
           description: Return list of environments
@@ -89,7 +89,7 @@ paths:
   /get_bus:
     get:
       summary: Return list of BU's
-      operationId: app.get_bus
+      operationId: db_auth_functions.get_bus
       responses:
         '200':
           description: Return list of BU's
@@ -103,7 +103,7 @@ paths:
   /get_apps:
     get:
       summary: Return list of App types
-      operationId: app.get_apps
+      operationId: db_auth_functions.get_apps
       responses:
         '200':
           description: Return list of App types
@@ -117,7 +117,7 @@ paths:
   /get_hosts:
     get:
       summary: Return list of Hosts
-      operationId: app.get_hosts
+      operationId: db_auth_functions.get_hosts
       responses:
         '200':
           description: Return list of Hosts
@@ -132,7 +132,7 @@ paths:
   /createdb:
     get:
       summary: Return secret string
-      operationId: app.createdb
+      operationId: db_auth_functions.createdb
       responses:
         '200':
           description: secret response
@@ -146,7 +146,7 @@ paths:
   /add_env/{env_id}:
     get:
       summary: Add an environment
-      operationId: app.add_env
+      operationId: db_auth_functions.add_env
       parameters:
         - name: env_id
           description: User unique identifier
@@ -168,7 +168,7 @@ paths:
   /add_host/{host_id}:
     get:
       summary: Add an host
-      operationId: app.add_hosts
+      operationId: db_auth_functions.add_hosts
       parameters:
         - name: host_id
           description: Unique hostname 
@@ -190,7 +190,7 @@ paths:
   /add_app/{app_id}:
     get:
       summary: Add an application type
-      operationId: app.add_apps
+      operationId: db_auth_functions.add_apps
       parameters:
         - name: app_id
           description: Unique app type
@@ -213,7 +213,7 @@ paths:
   /add_bu/{bu_id}:
     get:
       summary: Add an BU
-      operationId: app.add_bus
+      operationId: db_auth_functions.add_bus
       parameters:
         - name: bu_id
           description: Unique BU id
@@ -233,12 +233,10 @@ paths:
       - jwt: ['secret']
 
 
-
-
   /get_user_envs/{user_id}:
     get:
       summary: Return secret string
-      operationId: app.get_user_envs
+      operationId: db_auth_functions.get_user_envs
       parameters:
         - name: user_id
           description: User unique identifier
@@ -261,7 +259,7 @@ paths:
   /add_user_envs/{user_id}/{env_id}:
     get:
       summary: Add user environment
-      operationId: app.add_user_envs
+      operationId: db_auth_functions.add_user_envs
       parameters:
         - name: user_id
           description: User unique identifier
@@ -291,7 +289,7 @@ paths:
   /del_user_envs/{user_id}/{env_id}:
     get:
       summary: Delete user environment
-      operationId: app.del_user_envs
+      operationId: db_auth_functions.del_user_envs
       parameters:
         - name: user_id
           description: User unique identifier
@@ -321,7 +319,7 @@ paths:
   /add_user_bus/{user_id}/{bu_id}:
     get:
       summary: Add user BU
-      operationId: app.add_user_bus
+      operationId: db_auth_functions.add_user_bus
       parameters:
         - name: user_id
           description: User unique identifier
@@ -350,7 +348,7 @@ paths:
   /del_user_bus/{user_id}/{bu_id}:
     get:
       summary: Remove user BU
-      operationId: app.del_user_bus
+      operationId: db_auth_functions.del_user_bus
       parameters:
         - name: user_id
           description: User unique identifier
@@ -380,7 +378,7 @@ paths:
   /get_user_bus/{user_id}:
     get:
       summary: Return secret string
-      operationId: app.get_user_bus
+      operationId: db_auth_functions.get_user_bus
       parameters:
         - name: user_id
           description: User unique identifier
@@ -403,7 +401,7 @@ paths:
   /get_user_app/{user_id}:
     get:
       summary: Return secret string
-      operationId: app.get_user_app
+      operationId: db_auth_functions.get_user_app
       parameters:
         - name: user_id
           description: User unique identifier
@@ -425,7 +423,7 @@ paths:
   /add_user_app/{user_id}/{app_id}:
     get:
       summary: Add user apps type
-      operationId: app.add_user_app
+      operationId: db_auth_functions.add_user_app
       parameters:
         - name: user_id
           description: User unique identifier
@@ -455,7 +453,7 @@ paths:
   /del_user_app/{user_id}/{app_id}:
     get:
       summary: Remove user apps type
-      operationId: app.del_user_app
+      operationId: db_auth_functions.del_user_app
       parameters:
         - name: user_id
           description: User unique identifier
@@ -485,7 +483,7 @@ paths:
   /get_user_hosts/{user_id}:
     get:
       summary: Return secret string
-      operationId: app.get_user_hosts
+      operationId: db_auth_functions.get_user_hosts
       parameters:
         - name: user_id
           description: User unique identifier
@@ -507,7 +505,7 @@ paths:
   /del_user_host/{user_id}/{host_id}:
     get:
       summary: Remove user host
-      operationId: app.del_user_host
+      operationId: db_auth_functions.del_user_host
       parameters:
         - name: user_id
           description: User unique identifier
@@ -536,7 +534,7 @@ paths:
   /add_user_host/{user_id}/{host_id}:
     get:
       summary: Add user host
-      operationId: app.add_user_host
+      operationId: db_auth_functions.add_user_host
       parameters:
         - name: user_id
           description: User unique identifier
@@ -596,7 +594,7 @@ paths:
   /del_bu/{bu_id}:
     get:
       summary: Remove BU
-      operationId: app.del_bu
+      operationId: db_auth_functions.del_bu
       parameters:
         - name: bu_id
           description: environment
@@ -619,7 +617,7 @@ paths:
   /del_env/{env_id}:
     get:
       summary: Remove and environment
-      operationId: app.del_env
+      operationId: db_auth_functions.del_env
       parameters:
         - name: env_id
           description: environment
@@ -641,7 +639,7 @@ paths:
   /del_app/{app_id}:
     get:
       summary: Remove app type
-      operationId: app.del_app
+      operationId: db_auth_functions.del_app
       parameters:
         - name: app_id
           description: Remove and application ID 
@@ -663,7 +661,7 @@ paths:
   /del_host/{host_id}:
     get:
       summary: Remove host
-      operationId: app.del_host
+      operationId: db_auth_functions.del_host
       parameters:
         - name: host_id
           description: remove a host
