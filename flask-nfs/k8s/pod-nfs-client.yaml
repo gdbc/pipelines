@@ -8,4 +8,4 @@ metadata:
 spec:
   containers:
   - name: nfs-client
-    image: docker.io/gra3m3/nfstest:4
+    image: docker.io/gra3m3/nfstest:5
