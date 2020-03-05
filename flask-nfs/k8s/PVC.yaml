@@ -10,4 +10,4 @@ spec:
     requests:
       storage: 10Gi
   #storageClassName: standard
-  volumeName: nfs-inttest1
+  volumeName: inttest1-pvc

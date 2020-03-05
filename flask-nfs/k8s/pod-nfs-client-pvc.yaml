@@ -15,4 +15,4 @@ spec:
   volumes:
      - name: pvc-inttest1
        persistentVolumeClaim:
-           claimName: nfs-inttest1
+           claimName: inttest1-pvc
