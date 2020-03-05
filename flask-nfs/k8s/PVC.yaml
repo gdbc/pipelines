@@ -4,10 +4,11 @@ metadata:
   name: inttest1-pvc
   namespace: inttest1
 spec:
+  storageClassName: manual
   accessModes:
   - ReadWriteMany
   resources:
     requests:
       storage: 10Gi
   #storageClassName: standard
-  volumeName: inttest1-pvc
+  #volumeName: inttest1-pvc
