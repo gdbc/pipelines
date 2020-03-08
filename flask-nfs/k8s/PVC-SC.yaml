@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: inttest2-pvc
+  namespace: inttest1
+spec:
+  storageClassName: manual
+  accessModes:
+  - ReadWriteMany
+  storageClassName: slow
+  resources:
+    requests:
+      storage: 10Gi
+  #storageClassName: standard
+  #volumeName: inttest1-pvc

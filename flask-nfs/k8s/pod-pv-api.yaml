@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: pvc-api
+  namespace: inttest1
+  labels:
+    app: pvc-api
+spec:
+  containers:
+  - name: pvc-api
+    image: docker.io/gra3m3/pvc-api:3
