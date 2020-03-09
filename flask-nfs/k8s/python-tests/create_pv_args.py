@@ -9,25 +9,30 @@ def main():
     "apiVersion": "v1",
     "kind": "PersistentVolume",
     "metadata": {
-        #"name": "nfs-inttest2"
         "name": pvname
     },
     "spec": {
-        "storageClassName": "medium",
+        "storageClassName": "standard",
+        "accessModes": [
+            "ReadWriteMany",
+            "ReadWriteOnce",
+            "ReadOnlyMany"
+        ],
         "capacity": {
             "storage": "10Gi"
         },
-        "accessModes": [
-            "ReadWriteMany"
+        "mountOptions": [
+            "vers=4"
         ],
         "nfs": {
-            "server": server,
-            "path": path
-        }
-    }
+            "path": path,
+            "server": server
+        },
+        "persistentVolumeReclaimPolicy": "Retain",
+        "volumeMode": "Filesystem"
     }
 
-
+    }
 
     pvcs = api.create_persistent_volume(body=my_resource)
     print(pvcs)

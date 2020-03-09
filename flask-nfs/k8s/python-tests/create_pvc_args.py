@@ -4,7 +4,7 @@ def main():
     api = client.CoreV1Api()
     namespace = "inttest1"
     name = "inttest3-pvc"
-    storageclass = "medium"
+    volumename = "nfs-inttest3"
     my_resource = {
     "apiVersion": "v1",
     "kind": "PersistentVolumeClaim",
@@ -13,16 +13,17 @@ def main():
         "namespace": namespace
     },
     "spec": {
-        "storageClassName": storageclass,
+        "volumeName": volumename,
         "accessModes": [
             "ReadWriteMany"
         ],
         "resources": {
             "requests": {
-                "storage": "10Gi"
+                "storage": "1Gi"
             }
         }
     }
+
     }
     pvcs = api.create_namespaced_persistent_volume_claim(namespace="inttest1",body=my_resource)
     print(pvcs)
