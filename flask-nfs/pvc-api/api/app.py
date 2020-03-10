@@ -59,13 +59,13 @@ def createpvcs():
         token      = request.args.get('token')
         namespace  = request.args.get('namespace')
         pvname     = request.args.get('pvname')
-        volumename = request.args.get('volumename')
+        pvcname    = request.args.get('pvcname')
         print("token: ", token)
         print("namespace: ", namespace)
         print("pvname: ", pvname)
-        print("volumename: ", volumename)
+        print("pvcname: ", pvcname)
         if token in tokens:
-            createpvc  = cpvc(namespace, pvname, volumename) 
+            createpvc  = cpvc(namespace, pvcname, pvname) 
             return createpvc
         else:
             return '"message": {"auth": "failed"}'

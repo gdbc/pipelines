@@ -38,5 +38,6 @@ def cpv(pvname, server, path):
         }
 
         pvs = api.create_persistent_volume(body=my_resource)
+        return str(pvs)
     except Exception as e:
-        print("Exception e: %s", e)
+        return("Exception e: ", str(e))

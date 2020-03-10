@@ -1,12 +1,12 @@
 from kubernetes import client, config, watch
 
-def cpvc(namespace, name, volumename):    
+def cpvc(namespace, pvcname, pvname):    
     try:   
         config.load_incluster_config()
         api = client.CoreV1Api()
         ns  = namespace
-        nm  = name
-        vn  = volumename
+        nm  = pvcname
+        vn  = pvname
 
         my_resource = {
         "apiVersion": "v1",
@@ -29,6 +29,6 @@ def cpvc(namespace, name, volumename):
 
         }
         pvcs = api.create_namespaced_persistent_volume_claim(namespace=ns,body=my_resource)
-        return pvcs
+        return str(pvcs)
     except Exception as e:
-        print("Exception: %s", e)
+        return("Exception: ", str(e))
