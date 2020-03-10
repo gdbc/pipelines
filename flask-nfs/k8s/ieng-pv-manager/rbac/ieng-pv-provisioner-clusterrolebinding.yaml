@@ -1,0 +1,22 @@
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  annotations:
+    kubectl.kubernetes.io/last-applied-configuration: |
+      {"apiVersion":"rbac.authorization.k8s.io/v1","kind":"ClusterRoleBinding","metadata":{"annotations":{},"labels":{"addonmanager.kubernetes.io/mode":"EnsureExists"},"name":"storage-provisioner"},"roleRef":{"apiGroup":"rbac.authorization.k8s.io","kind":"ClusterRole","name":"system:persistent-volume-provisioner"},"subjects":[{"kind":"ServiceAccount","name":"storage-provisioner","namespace":"kube-system"}]}
+  creationTimestamp: "2020-03-09T20:25:48Z"
+  labels:
+    addonmanager.kubernetes.io/mode: EnsureExists
+  name: ieng-pv-provisioner-clusterrolebinding
+  resourceVersion: "254"
+  selfLink: /apis/rbac.authorization.k8s.io/v1/clusterrolebindings/storage-provisioner
+  uid: ef68b1d1-f5f3-495b-be68-d24fa815d973
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  #name: cluster-admin
+  name: ieng-pv-provisioner-clusterrole
+subjects:
+- kind: ServiceAccount
+  name: ieng-pv-provisioner
+  namespace: jarvis
