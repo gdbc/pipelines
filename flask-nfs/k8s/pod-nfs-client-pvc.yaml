@@ -10,9 +10,9 @@ spec:
   - name: nfs-client
     image: docker.io/gra3m3/nfstest:6
     volumeMounts:
-    - name: pvc-inttest1
-      mountPath: "/inttest1"
+    - name: pvc-inttest3
+      mountPath: "/inttest3"
   volumes:
-     - name: pvc-inttest1
+     - name: pvc-inttest3
        persistentVolumeClaim:
-           claimName: inttest1-pvc
+           claimName: inttest3-pvc

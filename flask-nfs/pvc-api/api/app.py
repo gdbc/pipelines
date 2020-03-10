@@ -3,6 +3,8 @@ from flask import Flask, jsonify, request, Response
 from random import randrange
 from create_pv import cpv
 from create_pvc import cpvc
+from delete_pv import dpv
+from delete_pvc import dpvc
 
 app = Flask(__name__)
 
@@ -49,7 +51,7 @@ def createpvs():
             return createpv
         else:
             return '"message": {"auth": "failed"}'
-    except Exceptions as e:
+    except Exception as e:
         print("error: %s", e)
         return '"message": {"error": "Something borked!"}"'
 
@@ -69,9 +71,44 @@ def createpvcs():
             return createpvc
         else:
             return '"message": {"auth": "failed"}'
-    except Exceptions as e:
+    except Exception as e:
         print("error: %s", e)
         return '"message": {"error": "Something borked!"}"'
+
+@app.route('/deletepvs')
+def deletepvs():
+    try:
+        token    = request.args.get('token')
+        pvname   = request.args.get('pvname')
+        print("token: ", token)
+        print("pvname: ", pvname)
+        if token in tokens:
+            deletepv = dpv(pvname)
+            return deletepv
+        else:
+            return '"message": {"auth": "failed"}'
+    except Exception as e:
+        print("error: %s", e)
+        return '"message": {"error": "Something borked!"}"'
+
+@app.route('/deletepvcs')
+def deletepvcs():
+    try:
+        token     = request.args.get('token')
+        pvcname   = request.args.get('pvcname')
+        namespace = request.args.get('namespace')
+        print("token: ", token)
+        print("pvcname: ", pvcname)
+        print("namespace: ", namespace)
+        if token in tokens:
+            deletepvc = dpvc(namespace, pvcname)
+            return deletepvc
+        else:
+            return '"message": {"auth": "failed"}'
+    except Exception as e:
+        print("error: %s", e)
+        return '"message": {"error": "Something borked!"}"'
+
 
 @app.route('/getauth')
 def getauth():
