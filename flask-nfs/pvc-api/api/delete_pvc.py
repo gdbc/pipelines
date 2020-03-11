@@ -7,6 +7,6 @@ def dpvc(namespace, pvcname):
         ns    = namespace
         nm    = pvcname 
         dpvcs = api.delete_namespaced_persistent_volume_claim(name=nm,namespace=ns)
-        return str(dpvcs) 
+        return str(dpvcs + "\n") 
     except Exception as e:
         return("Exception: ", str(e))
