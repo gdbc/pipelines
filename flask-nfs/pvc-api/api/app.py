@@ -5,6 +5,8 @@ from create_pv import cpv
 from create_pvc import cpvc
 from delete_pv import dpv
 from delete_pvc import dpvc
+from get_pvcs import getpvcs
+from get_pvs import getpvs
 
 app = Flask(__name__)
 
@@ -20,20 +22,31 @@ def get_randrange():
     return "hi"
 
 @app.route('/getpvs')
-def getpvs():
-    token = request.args.get('token')
-    if token in tokens:
-        return 'getpvs'
-    else:
-        return '"message": {"auth": "failed"}'
+def gpvs():
+    try:
+        token = request.args.get('token')
+        if token in tokens:
+            gtpvs = getpvs()
+            return gtpvs
+        else:
+            return '"message": {"auth": "failed"}'
+    except Exception as e:
+        print("error: %s", e)
+        return '"message": {"error": "Something borked in getpvs"}"'
 
 @app.route('/getpvcs')
-def getpvcs():
-    token = request.args.get('token')
-    if token in tokens:
-        return 'getpvcs'
-    else:
-        return '"message": {"auth": "failed"}'
+def gpvcs():
+    try: 
+        token     = request.args.get('token')
+        namespace = request.args.get('namespace')
+        if token in tokens:
+            gtpvcs = getpvcs(namespace)
+            return gtpvcs
+        else:
+            return '"message": {"auth": "failed"}'
+    except Exception as e:
+        print("error: %s", e)
+        return '"message": {"error": "Something borked in getpvs"}"'
 
 @app.route('/createpvs')
 def createpvs():
