@@ -7,7 +7,9 @@ from kubernetes import client, config, watch
 #token="456asdffdaTGyI123zZ1"
 
 #This should check for creation and deletion of PVs
-def checkpvrbac(token, svr, mnt, rbackfile="pv-rbac.yaml"):
+RBACYAML = "pv-rbac.yaml"
+
+def checkpvrbac(token, svr, mnt, rbackfile=RBACYAML):
    try: 
        rbacfile = yaml.load(open(rbackfile))
        if token in rbacfile['tokens']:
@@ -25,22 +27,22 @@ def checkpvrbac(token, svr, mnt, rbackfile="pv-rbac.yaml"):
        return False
 
 #This should check for creation and deletion of pvcs
-def checkpvcrbac(token, pvcname, rbackfile="pv-rbac.yaml"):
-   try: 
-       rbacfile = yaml.load(open(rbackfile))
-       if token in rbacfile['tokens']:
-           if svr in rbacfile['tokens'][token]['volumes']:
-               if mnt in rbacfile['tokens'][token]['volumes'][svr]['paths']:
-                   return True
-               else:
-                   return False
-           else:
-               return False
-       else:
-           return False
-   except Exception as e:
-       print("Error: Check authorizations: ", e)
-       return False
+#def checkpvcrbac(token, pvcname, rbackfile=RBACYAML):
+#   try: 
+#       rbacfile = yaml.load(open(rbackfile))
+#       if token in rbacfile['tokens']:
+#           if svr in rbacfile['tokens'][token]['volumes']:
+#               if mnt in rbacfile['tokens'][token]['volumes'][svr]['paths']:
+#                   return True
+#               else:
+#                   return False
+#           else:
+#               return False
+#       else:
+#           return False
+#   except Exception as e:
+#       print("Error: Check authorizations: ", e)
+#       return False
 
 def getpv(namespace, pvcname):
     try:
@@ -56,8 +58,27 @@ def getpv(namespace, pvcname):
                 return pvn
         return "No pv found for pvc: ", pvcn
     except Exception as e:
-       print("Error: Check authorizations: ", e)
+       print("Error: something failed in getpv", e)
        return "failed" 
 
+def getpvnfsinfo(token, pv):
+    try:
+        config.load_kube_config()
+        pvn = pv
+        api = client.CoreV1Api()
+        pvs = api.list_persistent_volume()
+        srv = "none"
+        mnt = "none"
+        for pv in pvs.items:
+            if pv.metadata.name == pvn:
+                if pv.spec.nfs is not None:
+                    srv = pv.spec.nfs.server
+                    mnt = pv.spec.nfs.path
+                else:
+                    return("pv is not nfs volume!")
+        return srv, mnt
+    except Exception as e:
+       print("Error: something failed in getpvnfsinfo", e)
+       return "failed" 
 
 

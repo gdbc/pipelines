@@ -1,0 +1,9 @@
+tokens: 
+    123asdffdaTGyI123zZ1:
+        volumes:
+            192.168.1.67:
+                paths: [/nfs/k8s/inttest1, /nfs/k8s/inttest2, /nfs/k8s/inttest3]
+    456asdffdaTGyI123zZ1:
+        volumes:
+            192.168.1.67:
+                paths: [/nfs/k8s/inttest4, /nfs/k8s/inttest5, /nfs/k8s/inttest6]
