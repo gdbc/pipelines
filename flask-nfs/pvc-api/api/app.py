@@ -7,6 +7,7 @@ from delete_pv import dpv
 from delete_pvc import dpvc
 from get_pvcs import getpvcs
 from get_pvs import getpvs
+from check_pv_rbac import checkrbac
 
 app = Flask(__name__)
 
