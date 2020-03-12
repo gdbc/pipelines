@@ -7,7 +7,10 @@ from delete_pv import dpv
 from delete_pvc import dpvc
 from get_pvcs import getpvcs
 from get_pvs import getpvs
-from check_pv_rbac import checkrbac
+from check_pv_rbac import checkpvrbac
+from check_pv_rbac2 import getpv
+from check_pv_rbac2 import getpvnfsinfo
+
 
 app = Flask(__name__)
 
@@ -61,8 +64,11 @@ def createpvs():
         print("server: ", server)
         print("path: ", path)
         if token in tokens:
-            createpv = cpv(pvname, server, path)
-            return createpv
+            if checkpvrbac(token, server, path):
+                createpv = cpv(pvname, server, path)
+                return createpv
+            else:
+                return '"message": {"auth": "failed"}'
         else:
             return '"message": {"auth": "failed"}'
     except Exception as e:
@@ -81,8 +87,15 @@ def createpvcs():
         print("pvname: ", pvname)
         print("pvcname: ", pvcname)
         if token in tokens:
-            createpvc  = cpvc(namespace, pvcname, pvname) 
-            return createpvc
+            srv, path = getpvnfsinfo(token, pvname)
+            if srv is not "none" and path is not "none":
+                if checkpvrbac(token, srv, path):
+                   createpvc  = cpvc(namespace, pvcname, pvname) 
+                   return createpvc
+                else:
+                    return '"message": {"auth": "failed"}'
+            else:
+                return '"message": {"auth": "failed"}'
         else:
             return '"message": {"auth": "failed"}'
     except Exception as e:
@@ -97,8 +110,14 @@ def deletepvs():
         print("token: ", token)
         print("pvname: ", pvname)
         if token in tokens:
-            deletepv = dpv(pvname)
-            return deletepv
+            server, mount = getpvnfsinfo(token, pvname)
+            getrbac = checkpvrbac(token, server, mount)
+            if getrbac:
+                deletepv = dpv(pvname)
+                return deletepv
+            else:
+                return '"message": {"auth": "failed"}'
+            return '"message": {"auth": "failed"}'
         else:
             return '"message": {"auth": "failed"}'
     except Exception as e:
@@ -115,8 +134,16 @@ def deletepvcs():
         print("pvcname: ", pvcname)
         print("namespace: ", namespace)
         if token in tokens:
-            deletepvc = dpvc(namespace, pvcname)
-            return deletepvc
+            gpv = getpv(namespace, pvcname)
+            srv, path = getpvnfsinfo(token, gpv)
+            if srv is not "none" and path is not "none":
+                if checkpvrbac(token, srv, path):
+                    deletepvc = dpvc(namespace, pvcname)
+                    return deletepvc
+                else:
+                   return '"message": {"auth": "failed"}'
+            else:
+                return '"message": {"auth": "failed"}'
         else:
             return '"message": {"auth": "failed"}'
     except Exception as e:

@@ -7,7 +7,7 @@ from kubernetes import client, config, watch
 #token="456asdffdaTGyI123zZ1"
 
 #This should check for creation and deletion of PVs
-RBACYAML = "pv-rbac.yaml"
+RBACYAML = "/home/flask/rbac/pv-rbac.yaml"
 
 def checkpvrbac(token, svr, mnt, rbackfile=RBACYAML):
    try: 
@@ -49,7 +49,7 @@ def getpv(namespace, pvcname):
         pvn      = ""
         ns       = namespace
         pvcn     = pvcname
-        config.load_kube_config()
+        config.load_incluster_config()
         api      = client.CoreV1Api()
         pvcs     = api.list_namespaced_persistent_volume_claim(namespace=ns, watch=False)
         for pvc in pvcs.items:
@@ -63,7 +63,7 @@ def getpv(namespace, pvcname):
 
 def getpvnfsinfo(token, pv):
     try:
-        config.load_kube_config()
+        config.load_incluster_config()
         pvn = pv
         api = client.CoreV1Api()
         pvs = api.list_persistent_volume()
