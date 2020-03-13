@@ -10,11 +10,11 @@ from get_pvs import getpvs
 from check_pv_rbac import checkpvrbac
 from check_pv_rbac import getpv
 from check_pv_rbac import getpvnfsinfo
+from get_auths import getrbac
+from get_tokens import hastoken
 
 
 app = Flask(__name__)
-
-tokens=['123asdffdaTGyI123zZ1']
 
 
 @app.route('/')
@@ -25,11 +25,25 @@ def get_randrange():
     #job = q.enqueue(randrange, start, stop, step, result_ttl=5000)
     return "hi"
 
+@app.route('/getauths')
+def gassls():
+    try:
+        token = request.args.get('token')
+        if hastoken(token):
+            gta = getrbac(token)
+            return gta
+        else:
+            return '"message": {"getauth": "dont seem to have any pvs authorized"}'
+    except Exception as e:
+        print("error: %s", e)
+        return '"message": {"error": "Something borked in getauth"}"'
+
+
 @app.route('/getpvs')
 def gpvs():
     try:
         token = request.args.get('token')
-        if token in tokens:
+        if hastoken(token):
             gtpvs = getpvs()
             return gtpvs
         else:
@@ -43,7 +57,7 @@ def gpvcs():
     try: 
         token     = request.args.get('token')
         namespace = request.args.get('namespace')
-        if token in tokens:
+        if hastoken(token):
             gtpvcs = getpvcs(namespace)
             return gtpvcs
         else:
@@ -63,7 +77,7 @@ def createpvs():
         print("pvname: ", pvname)
         print("server: ", server)
         print("path: ", path)
-        if token in tokens:
+        if hastoken(token):
             if checkpvrbac(token, server, path):
                 createpv = cpv(pvname, server, path)
                 return createpv
@@ -86,7 +100,7 @@ def createpvcs():
         print("namespace: ", namespace)
         print("pvname: ", pvname)
         print("pvcname: ", pvcname)
-        if token in tokens:
+        if hastoken(token):
             srv, path = getpvnfsinfo(token, pvname)
             if srv is not "none" and path is not "none":
                 if checkpvrbac(token, srv, path):
@@ -109,7 +123,7 @@ def deletepvs():
         pvname   = request.args.get('pvname')
         print("token: ", token)
         print("pvname: ", pvname)
-        if token in tokens:
+        if hastoken(token):
             server, mount = getpvnfsinfo(token, pvname)
             getrbac = checkpvrbac(token, server, mount)
             if getrbac:
@@ -133,7 +147,7 @@ def deletepvcs():
         print("token: ", token)
         print("pvcname: ", pvcname)
         print("namespace: ", namespace)
-        if token in tokens:
+        if hastoken(token):
             gpv = getpv(namespace, pvcname)
             srv, path = getpvnfsinfo(token, gpv)
             if srv is not "none" and path is not "none":
@@ -154,7 +168,7 @@ def deletepvcs():
 @app.route('/getauth')
 def getauth():
     token = request.args.get('token')
-    if token in tokens:
+    if hastoken(token):
         return 'getauth'
     else:
         return '"message": {"auth": "failed"}'

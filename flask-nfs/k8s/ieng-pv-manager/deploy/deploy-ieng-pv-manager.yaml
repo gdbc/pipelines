@@ -24,7 +24,7 @@ spec:
         run: ieng-pv-manager
     spec:
       containers:
-      - image: docker.io/gra3m3/pvc-api:26
+      - image: docker.io/gra3m3/pvc-api:32
         imagePullPolicy: IfNotPresent
         name: ieng-pv-manager
         volumeMounts:
