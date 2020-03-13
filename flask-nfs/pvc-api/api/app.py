@@ -8,8 +8,8 @@ from delete_pvc import dpvc
 from get_pvcs import getpvcs
 from get_pvs import getpvs
 from check_pv_rbac import checkpvrbac
-from check_pv_rbac2 import getpv
-from check_pv_rbac2 import getpvnfsinfo
+from check_pv_rbac import getpv
+from check_pv_rbac import getpvnfsinfo
 
 
 app = Flask(__name__)

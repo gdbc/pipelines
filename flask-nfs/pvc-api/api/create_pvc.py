@@ -29,6 +29,7 @@ def cpvc(namespace, pvcname, pvname):
 
         }
         pvcs = api.create_namespaced_persistent_volume_claim(namespace=ns,body=my_resource)
-        return str(pvcs + "\n")
+        output = str(pvcs) + "\n"
+        return output
     except Exception as e:
         return("Exception: ", str(e))

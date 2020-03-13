@@ -8,9 +8,19 @@ def getpv():
     replystr += ("---- PVCs ---\n")
     replystr += ("%-16s\t%-10s\t%-30s\t%-10s\t%-6s\n" % ("NAME", "STATUS", "CLAIM", "STORAGECLASS", "SIZE"))
     for pv in pvs.items:
-        print(pv)
+        #print(pv)
+        print(pv.metadata.name)
+        print(pv.spec)
+        print(pv.spec.rbd)
+        if pv.spec.rbd == None:
+           print("rbd is none")
+        print(pv.spec.nfs)
+        if pv.spec.nfs is not None:
+            print("ytes")
+        print(pv.spec.nfs.path)
+        print(pv.spec.nfs.server)
         replystr += ("%-16s\t%-10s\t%-30s\t%-10s\t%-6s\n" %(pv.metadata.name, pv.status.phase,pv.spec.claim_ref.namespace + "/" + pv.spec.claim_ref.name,pv.spec.storage_class_name,pv.spec.capacity['storage']))
-        #print(pv.metadata.name)
+        #print(pv.metadata.name.path)
         #print(pv.status.phase)
         #print(pv.spec.claim_ref.namespace + "/" + pv.spec.claim_ref.name)
         #print(pv.spec.storage_class_name)

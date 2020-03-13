@@ -24,7 +24,17 @@ spec:
         run: ieng-pv-manager
     spec:
       containers:
-      - image: docker.io/gra3m3/pvc-api:20
+      - image: docker.io/gra3m3/pvc-api:26
         imagePullPolicy: IfNotPresent
         name: ieng-pv-manager
+        volumeMounts:
+        - name: rbac-file
+          mountPath: /home/flask/rbac
       serviceAccountName: ieng-pv-provisioner
+      volumes:
+      - name: rbac-file
+        configMap:
+           name: pv-rbac
+           items:
+           - key: pv-rbac-key
+             path: pv-rbac.yaml
