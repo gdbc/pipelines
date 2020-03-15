@@ -11,8 +11,10 @@ RUN groupadd -g ${gid} ${group} \
 
 RUN  mkdir ${FLASK_HOME}/.kube
 RUN  mkdir ${FLASK_HOME}/.minikube
-COPy api/.kube/config ${FLASK_HOME}/.kube/
-COPy api/.minikube/* ${FLASK_HOME}./minikube/ 
+COPY api/.kube/config ${FLASK_HOME}/.kube/
+COPY api/.minikube/client.key ${FLASK_HOME}/.minikube/ 
+COPY api/.minikube/client.crt ${FLASK_HOME}/.minikube/ 
+COPY api/.minikube/ca.crt ${FLASK_HOME}/.minikube/ 
 COPY api/app.py ${FLASK_HOME}
 COPY api/create_pvc.py ${FLASK_HOME}
 COPY api/create_pv.py ${FLASK_HOME}
@@ -26,6 +28,8 @@ COPY api/check_pv_rbac.py ${FLASK_HOME}
 COPY api/multicluster-listpods.py ${FLASK_HOME}
 WORKDIR ${FLASK_HOME}
 RUN chown ${user}:${group} app.py
+RUN chown ${user}:${group} -R .kube
+RUN chown ${user}:${group} -R .minikube
 RUN dnf install wget -y && dnf clean all 
 RUN wget https://dl.fedoraproject.org/pub/epel/epel-release-latest-8.noarch.rpm
 RUN rpm -vih epel-release* 
