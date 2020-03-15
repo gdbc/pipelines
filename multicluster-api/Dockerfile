@@ -21,6 +21,7 @@ COPY api/delete_pvc.py ${FLASK_HOME}
 COPY api/get_pvcs.py ${FLASK_HOME}
 COPY api/get_pvs.py ${FLASK_HOME}
 COPY api/get_auths.py ${FLASK_HOME}
+COPY api/get_tokens.py ${FLASK_HOME}
 COPY api/check_pv_rbac.py ${FLASK_HOME}
 COPY api/multicluster-listpods.py ${FLASK_HOME}
 WORKDIR ${FLASK_HOME}
