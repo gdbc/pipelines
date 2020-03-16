@@ -1,9 +1,9 @@
 from kubernetes import client, config, watch
 
-def cpvc(namespace, pvcname, pvname):    
+def cpvc(context, namespace, pvcname, pvname):    
     try:   
-        config.load_incluster_config()
-        api = client.CoreV1Api()
+        cluster = context
+        api = client.CoreV1Api(api_client=config.new_client_from_config(context=cluster))
         ns  = namespace
         nm  = pvcname
         vn  = pvname

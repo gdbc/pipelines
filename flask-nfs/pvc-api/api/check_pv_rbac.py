@@ -9,13 +9,16 @@ from kubernetes import client, config, watch
 #This should check for creation and deletion of PVs
 RBACYAML = "/home/flask/rbac/pv-rbac.yaml"
 
-def checkpvrbac(token, svr, mnt, rbackfile=RBACYAML):
-   try: 
+def checkpvrbac(cluster, token, svr, mnt, rbackfile=RBACYAML):
+   try:
        rbacfile = yaml.load(open(rbackfile))
        if token in rbacfile['tokens']:
-           if svr in rbacfile['tokens'][token]['volumes']:
-               if mnt in rbacfile['tokens'][token]['volumes'][svr]['paths']:
-                   return True
+           if cluster in rbacfile['tokens'][token]['contexts']:
+               if svr in rbacfile['tokens'][token]['contexts'][cluster]['volumes']:
+                   if mnt in rbacfile['tokens'][token]['contexts'][cluster]['volumes'][svr]['paths']:
+                       return True
+                   else:
+                       return False
                else:
                    return False
            else:
@@ -44,7 +47,7 @@ def checkpvrbac(token, svr, mnt, rbackfile=RBACYAML):
 #       print("Error: Check authorizations: ", e)
 #       return False
 
-def getpv(namespace, pvcname):
+def getpv(cluster, namespace, pvcname):
     try:
         pvn      = ""
         ns       = namespace
@@ -61,7 +64,7 @@ def getpv(namespace, pvcname):
        print("Error: something failed in getpv", e)
        return "failed" 
 
-def getpvnfsinfo(token, pv):
+def getpvnfsinfo(cluster, token, pv):
     try:
         config.load_incluster_config()
         pvn = pv

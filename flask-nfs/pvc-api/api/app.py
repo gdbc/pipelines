@@ -43,8 +43,9 @@ def gassls():
 def gpvs():
     try:
         token = request.args.get('token')
+        clstr = request.args.get('cluster')
         if hastoken(token):
-            gtpvs = getpvs()
+            gtpvs = getpvs(clstr)
             return gtpvs
         else:
             return '"message": {"auth": "failed"}'
@@ -57,8 +58,9 @@ def gpvcs():
     try: 
         token     = request.args.get('token')
         namespace = request.args.get('namespace')
+        clstr = request.args.get('cluster')
         if hastoken(token):
-            gtpvcs = getpvcs(namespace)
+            gtpvcs = getpvcs(clstr, namespace)
             return gtpvcs
         else:
             return '"message": {"auth": "failed"}'
@@ -73,13 +75,14 @@ def createpvs():
         pvname   = request.args.get('pvname')
         server   = request.args.get('nfsserver')
         path     = request.args.get('path')
+        clstr    = request.args.get('cluster')
         print("token: ", token)
         print("pvname: ", pvname)
         print("server: ", server)
         print("path: ", path)
         if hastoken(token):
-            if checkpvrbac(token, server, path):
-                createpv = cpv(pvname, server, path)
+            if checkpvrbac(clstr, token, server, path):
+                createpv = cpv(clstr, pvname, server, path)
                 return createpv
             else:
                 return '"message": {"auth": "failed"}'
@@ -96,15 +99,16 @@ def createpvcs():
         namespace  = request.args.get('namespace')
         pvname     = request.args.get('pvname')
         pvcname    = request.args.get('pvcname')
+        clstr      = request.args.get('cluster')
         print("token: ", token)
         print("namespace: ", namespace)
         print("pvname: ", pvname)
         print("pvcname: ", pvcname)
         if hastoken(token):
-            srv, path = getpvnfsinfo(token, pvname)
+            srv, path = getpvnfsinfo(clstr, token, pvname)
             if srv is not "none" and path is not "none":
-                if checkpvrbac(token, srv, path):
-                   createpvc  = cpvc(namespace, pvcname, pvname) 
+                if checkpvrbac(clstr, token, srv, path):
+                   createpvc  = cpvc(clstr, namespace, pvcname, pvname) 
                    return createpvc
                 else:
                     return '"message": {"auth": "failed"}'

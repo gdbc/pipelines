@@ -1,9 +1,9 @@
 from kubernetes import client, config, watch
-def getpvs():    
+def getpvs(context):    
     try: 
         replystr = ""
-        config.load_incluster_config()
-        api      = client.CoreV1Api()
+        cluster = context
+        api      = client.CoreV1Api(api_client=config.new_client_from_config(context=cluster))
         pvs      = api.list_persistent_volume()
         replystr += ("---- PVCs ---\n")
         replystr += ("%-16s\t%-10s\t%-30s\t%-10s\t%-6s\n" % ("NAME", "STATUS", "CLAIM", "STORAGECLASS", "SIZE"))

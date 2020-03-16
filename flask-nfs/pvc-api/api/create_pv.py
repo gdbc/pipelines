@@ -1,9 +1,9 @@
 from kubernetes import client, config, watch
 
-def cpv(pvname, server, path):    
+def cpv(context, pvname, server, path):    
     try: 
-        config.load_incluster_config()
-        api = client.CoreV1Api()
+        cluster = context
+        api = client.CoreV1Api(api_client=config.new_client_from_config(context=cluster))
         pvn    = pvname
         srv    = server
         pth    = path
