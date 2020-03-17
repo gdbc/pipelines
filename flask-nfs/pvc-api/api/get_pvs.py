@@ -8,7 +8,14 @@ def getpvs(context):
         replystr += ("---- PVCs ---\n")
         replystr += ("%-16s\t%-10s\t%-30s\t%-10s\t%-6s\n" % ("NAME", "STATUS", "CLAIM", "STORAGECLASS", "SIZE"))
         for pv in pvs.items:
-            replystr += ("%-16s\t%-10s\t%-30s\t%-10s\t%-6s\n" %(pv.metadata.name, pv.status.phase,pv.spec.claim_ref.namespace + "/" + pv.spec.claim_ref.name,pv.spec.storage_class_name,pv.spec.capacity['storage']))
+            pvandpvc = ""
+            try: 
+                if pv.spec.claim_ref.namespace is not None:
+                    pvandpvc = pv.spec.claim_ref.namespace + "/" + pv.spec.claim_ref.name
+            except Exception as e:
+                pvandpvc = "Unassigned"
+            replystr += ("%-16s\t%-10s\t%-30s\t%-10s\t%-6s\n" %(pv.metadata.name, pv.status.phase, pvandpvc,pv.spec.storage_class_name,pv.spec.capacity['storage']))
+            pvandpvc = ""
         return replystr
     except Exception as e:
         print("error: ", e)
