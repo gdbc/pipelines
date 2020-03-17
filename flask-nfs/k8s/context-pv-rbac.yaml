@@ -1,10 +1,6 @@
 tokens: 
     123asdffdaTGyI123zZ1:
         contexts:
-            minikube:
-                volumes:
-                    192.168.1.67:
-                        paths: [/nfs/k8s/inttest1, /nfs/k8s/inttest2, /nfs/k8s/inttest3]
             k1:
                 volumes:
                     192.168.1.67:
@@ -31,5 +27,3 @@ tokens:
                 volumes:
                     192.168.1.67:
                         paths: [/nfs/k8s/inttest4, /nfs/k8s/inttest5, /nfs/k8s/inttest6]
-
-# k create configmap pv-rbac --from-file=pv-rbac-key=pv-rbac.yaml -n jarvis
