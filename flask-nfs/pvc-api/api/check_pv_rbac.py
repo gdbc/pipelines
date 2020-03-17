@@ -52,8 +52,7 @@ def getpv(cluster, namespace, pvcname):
         pvn      = ""
         ns       = namespace
         pvcn     = pvcname
-        config.load_incluster_config()
-        api      = client.CoreV1Api()
+        api      = client.CoreV1Api(api_client=config.new_client_from_config(context=cluster))
         pvcs     = api.list_namespaced_persistent_volume_claim(namespace=ns, watch=False)
         for pvc in pvcs.items:
             if str(pvc.metadata.name).strip() == str(pvcn).strip():
@@ -66,7 +65,6 @@ def getpv(cluster, namespace, pvcname):
 
 def getpvnfsinfo(cluster, token, pv):
     try:
-        config.load_incluster_config()
         pvn = pv
         api = client.CoreV1Api(api_client=config.new_client_from_config(context=cluster))
         pvs = api.list_persistent_volume()
