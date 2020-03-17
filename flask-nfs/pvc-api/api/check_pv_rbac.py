@@ -68,7 +68,7 @@ def getpvnfsinfo(cluster, token, pv):
     try:
         config.load_incluster_config()
         pvn = pv
-        api = client.CoreV1Api()
+        api = client.CoreV1Api(api_client=config.new_client_from_config(context=cluster))
         pvs = api.list_persistent_volume()
         srv = "none"
         mnt = "none"
