@@ -125,13 +125,14 @@ def deletepvs():
     try:
         token    = request.args.get('token')
         pvname   = request.args.get('pvname')
+        clstr    = request.args.get('cluster')
         print("token: ", token)
         print("pvname: ", pvname)
         if hastoken(token):
-            server, mount = getpvnfsinfo(token, pvname)
-            getrbac = checkpvrbac(token, server, mount)
+            server, mount = getpvnfsinfo(clstr, token, pvname)
+            getrbac = checkpvrbac(clstr, token, server, mount)
             if getrbac:
-                deletepv = dpv(pvname)
+                deletepv = dpv(clstr, pvname)
                 return deletepv
             else:
                 return '"message": {"auth": "failed"}'
@@ -148,15 +149,16 @@ def deletepvcs():
         token     = request.args.get('token')
         pvcname   = request.args.get('pvcname')
         namespace = request.args.get('namespace')
+        clstr     = request.args.get('cluster')
         print("token: ", token)
         print("pvcname: ", pvcname)
         print("namespace: ", namespace)
         if hastoken(token):
-            gpv = getpv(namespace, pvcname)
-            srv, path = getpvnfsinfo(token, gpv)
+            gpv = getpv(clstr, namespace, pvcname)
+            srv, path = getpvnfsinfo(clstr, token, gpv)
             if srv is not "none" and path is not "none":
-                if checkpvrbac(token, srv, path):
-                    deletepvc = dpvc(namespace, pvcname)
+                if checkpvrbac(clstr, token, srv, path):
+                    deletepvc = dpvc(clstr, namespace, pvcname)
                     return deletepvc
                 else:
                    return '"message": {"auth": "failed"}'
