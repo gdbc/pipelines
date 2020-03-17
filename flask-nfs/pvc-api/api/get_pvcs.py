@@ -1,11 +1,9 @@
 from kubernetes import client, config, watch
-def getpvcs(context, namespace):    
+def getpvcs(cluster, namespace):    
     try:
         ns       = namespace
         replystr = ""
-        cluster  = context
-        config.load_incluster_config(api_client=config.new_client_from_config(context=cluster))
-        api      = client.CoreV1Api()
+        api      = client.CoreV1Api(api_client=config.new_client_from_config(context=cluster))
         pvcs     = api.list_namespaced_persistent_volume_claim(namespace=ns, watch=False)
         replystr = "---- PVCs ---\n"
         replystr += ("%-16s\t%-40s\t%-6s\n" % ("Name", "Volume", "Size"))
