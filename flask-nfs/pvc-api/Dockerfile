@@ -17,7 +17,17 @@ COPY api/delete_pvc.py ${FLASK_HOME}
 COPY api/get_pvcs.py ${FLASK_HOME}
 COPY api/get_pvs.py ${FLASK_HOME}
 COPY api/check_pv_rbac.py ${FLASK_HOME}
+COPY api/get_auths.py ${FLASK_HOME}
+COPY api/get_tokens.py ${FLASK_HOME}
+RUN  mkdir ${FLASK_HOME}/.kube
+RUN  mkdir ${FLASK_HOME}/.minikube
+COPY api/.kube/config ${FLASK_HOME}/.kube/
+COPY api/.minikube/client.key ${FLASK_HOME}/.minikube/ 
+COPY api/.minikube/client.crt ${FLASK_HOME}/.minikube/ 
+COPY api/.minikube/ca.crt ${FLASK_HOME}/.minikube/ 
 WORKDIR ${FLASK_HOME}
+RUN chown ${user}:${group} -R .kube
+RUN chown ${user}:${group} -R .minikube
 RUN chown ${user}:${group} app.py
 RUN dnf install wget -y && dnf clean all 
 RUN wget https://dl.fedoraproject.org/pub/epel/epel-release-latest-8.noarch.rpm
